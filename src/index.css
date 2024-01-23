@@ -6,7 +6,9 @@
   --text-secondary: #5b5b5e;
   --white-color: #ffffff;
   --separator-color: #d4d6e0;
+  --email-color: #9ea1b1;
 }
 body {
   font-family: "Open Sans", sans-serif;
+  margin: 0;
 }
