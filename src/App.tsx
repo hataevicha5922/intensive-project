@@ -1,5 +1,9 @@
 import Button from "./components/Button/Button";
 import Input from "./components/Input/Input";
+// import { Menu } from "./pages/Menu/Menu";
+// import { Cart } from "./pages/Cart/Cart";
+// import { Error } from "./pages/Error/Error";
+
 function App() {
   return (
     <>
