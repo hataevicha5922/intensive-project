@@ -56,7 +56,7 @@ export function Layout() {
           LogOut
         </Button>
       </div>
-      <div>
+      <div className={s["content"]}>
         <Outlet />
       </div>
     </div>

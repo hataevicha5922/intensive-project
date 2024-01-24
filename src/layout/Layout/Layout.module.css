@@ -8,7 +8,10 @@
   padding: 30px;
   border-right: 1px solid var(--separator-color);
 }
-
+.content {
+  padding: 40px 60px;
+  width: 100%;
+}
 .menu {
   display: flex;
   flex-direction: column;
