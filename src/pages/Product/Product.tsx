@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
+import { NewsInterface } from "../../api/api.interface";
 
 const Product = () => {
-  const { id } = useParams();
+  const data = useLoaderData() as NewsInterface;
 
-  return <>Product {id}</>;
+  return <>Product {data.title}</>;
 };
 
 export default Product;

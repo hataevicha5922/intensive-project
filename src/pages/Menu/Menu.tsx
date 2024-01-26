@@ -1,8 +1,44 @@
+import { useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
 import s from "./Menu.module.css";
+
 import Headling from "../../components/Headling/Headling";
 import Search from "../../components/Search/Search";
-import ProductCart from "../../components/ProductCard/ProductCard";
+import { URL, KEY } from "../../helpers/API";
+
+import { NewsInterface } from "../../api/api.interface";
+import { MenuList } from "./MenuList/MenuList";
+
 export function Menu() {
+  const [responseData, setResponseData] = useState<NewsInterface[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
+
+  const getData = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(`${URL}/v1/news?lang=en&type=br`, {
+        headers: {
+          "Content-Type": "aplication/json",
+          Authorization: `${KEY}`,
+        },
+      });
+      const newsData = data.news;
+      setResponseData(newsData);
+      setIsLoading(false);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        setError(e.message);
+      }
+      setIsLoading(false);
+      console.error(error);
+      return;
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <div className={s["head"]}>
@@ -10,14 +46,9 @@ export function Menu() {
         <Search placeholder="Search" />
       </div>
       <div>
-        <ProductCart
-          id={1}
-          title={"Title"}
-          description={"Description"}
-          price={10}
-          rating={5}
-          image="../../../public/pizza.jpg"
-        />
+        {error && <>{error}</>}
+        {!isLoading && <MenuList data={responseData} />}
+        {isLoading && <>Loading...</>}
       </div>
     </>
   );
