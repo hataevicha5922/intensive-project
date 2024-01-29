@@ -60,7 +60,7 @@ export const Register = () => {
         <Button appearence="big">LogIn</Button>
       </form>
       <div className={s["links"]}>
-        <div>I have account</div>
+        <div>I have an account</div>
         <Link to="/auth/login">LogIn</Link>
       </div>
     </div>
