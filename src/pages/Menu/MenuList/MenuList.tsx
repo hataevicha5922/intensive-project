@@ -5,6 +5,7 @@ export const MenuList = ({ data }: MenuListPropsType) =>
   data.map((item) => {
     return (
       <ProductCart
+        key={item.id}
         id={item.id}
         title={item.title}
         description={item.tabTitle}
