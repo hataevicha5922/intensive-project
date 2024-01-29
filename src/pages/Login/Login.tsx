@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Link, useNavigate } from "react-router-dom";
 import s from "./Login.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -6,11 +5,11 @@ import { useForm } from "react-hook-form";
 import { auth } from "../../config/firebase-config";
 import { UserCredentialsType } from "../../types";
 
-
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import Input from "../../components/Input/Input";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../../config/yup-schema";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -18,14 +17,13 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: errror,
-  } = useForm<UserCredentialsType>({});
+    formState: { errors },
+  } = useForm<UserCredentialsType>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         navigate("/");
       })
       .catch((error) => {
@@ -46,6 +44,7 @@ export const Login = () => {
             placeholder="Email"
             name="email"
           />
+          <p className={s["error"]}>{errors.email?.message}</p>
         </div>
         <div className={s["field"]}>
           <label htmlFor="password">Password</label>
@@ -56,6 +55,7 @@ export const Login = () => {
             placeholder="Password"
             name="password"
           />
+          <p className={s["error"]}>{errors.password?.message}</p>
         </div>
         <Button appearence="big">LogIn</Button>
       </form>
@@ -66,4 +66,3 @@ export const Login = () => {
     </div>
   );
 };
-
