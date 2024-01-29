@@ -11,8 +11,8 @@ import Product from "./pages/Product/Product";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { AuthLayout } from "./layout/Auth/AuthLayout";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 
 const router = createBrowserRouter([
   {
