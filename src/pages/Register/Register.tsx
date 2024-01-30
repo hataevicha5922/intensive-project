@@ -7,23 +7,27 @@ import { useForm } from "react-hook-form";
 import { UserCredentialsType } from "../../types";
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
-import Input from "../../components/Input/Input";
+import { Input } from "../../components/Input/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserCredentialsType>({ resolver: yupResolver(schema) });
 
-  const navigate = useNavigate();
-
   const onSubmit = handleSubmit((data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        const userData = userCredential.user;
+        if (userData.email && userData.uid) {
+          localStorage.setItem("email", userData.email);
+          localStorage.setItem("uid", userData.uid);
+        }
         navigate("/");
       })
       .catch((error) => {
