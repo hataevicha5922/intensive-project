@@ -17,13 +17,17 @@ export function Menu() {
   const getData = async () => {
     try {
       setIsLoading(true);
-      const { data } = await axios.get(`${URL}/v1/news?lang=en&type=br`, {
-        headers: {
-          "Content-Type": "aplication/json",
-          Authorization: `${KEY}`,
-        },
-      });
-      const newsData = data.news;
+      const { data } = await axios.get(
+        `${URL}/api/v2.2/films
+      `,
+        {
+          headers: {
+            "Content-Type": "aplication/json",
+            "X-API-KEY": `${KEY}`,
+          },
+        }
+      );
+      const newsData = data.items;
       setResponseData(newsData);
       setIsLoading(false);
     } catch (e) {

@@ -4,19 +4,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../../config/firebase-config";
 import { UserCredentialsType } from "../../types";
-import { addUser } from "../../store/userSlice";
 
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
-import { useAppDispatch } from "../../hooks/hook";
 
 export const Login = () => {
   const navigate = useNavigate();
-
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -28,8 +24,10 @@ export const Login = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const userData = userCredential.user;
-        const user = { email: userData.email, userId: userData.uid };
-        dispatch(addUser(user));
+        if (userData.email && userData.uid) {
+          localStorage.setItem("email", userData.email);
+          localStorage.setItem("uid", userData.uid);
+        }
         navigate("/");
       })
       .catch((error) => {

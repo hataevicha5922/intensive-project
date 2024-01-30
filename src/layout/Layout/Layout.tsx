@@ -1,12 +1,13 @@
 /* eslint-disable no-console */
+import { useMemo, useState } from "react";
 import Button from "../../components/Button/Button";
-import { useAppSelector } from "../../hooks/hook";
 import s from "./Layout.module.css";
 import cn from "classnames";
 import { NavLink, Outlet } from "react-router-dom";
 
 export function Layout() {
-  const email = useAppSelector((state) => state.user.email);
+  const [isAuth, setIsAuth] = useState(true);
+  const email = useMemo(() => localStorage.getItem("email"), []);
 
   return (
     <div className={s["layout"]}>
@@ -17,7 +18,7 @@ export function Layout() {
             alt="Avatar"
             className={s["avatar"]}
           />
-          <div className={s["email"]}>{email}</div>
+          <div className={s["email"]}>{isAuth ? email : null}</div>
         </div>
         <div className={s["menu"]}>
           <NavLink

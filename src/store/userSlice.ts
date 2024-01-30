@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type UserState = {
-  email: string | null;
+  email: string;
   userId: string;
 };
 
@@ -25,4 +25,4 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const {addUser, logOut} = userSlice.actions;
+export const { addUser, logOut } = userSlice.actions;

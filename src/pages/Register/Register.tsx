@@ -1,11 +1,8 @@
-/* eslint-disable no-console */
 import { Link, useNavigate } from "react-router-dom";
 import s from "./Register.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "../../hooks/hook";
-import { addUser } from "../../store/userSlice";
 
 import { UserCredentialsType } from "../../types";
 import Button from "../../components/Button/Button";
@@ -17,8 +14,6 @@ import { schema } from "../../config/yup-schema";
 export const Register = () => {
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
-
   const {
     register,
     handleSubmit,
@@ -29,9 +24,10 @@ export const Register = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const userData = userCredential.user;
-        const user = { email: userData.email, userId: userData.uid };
-        dispatch(addUser(user));
-        console.log(user);
+        if (userData.email && userData.uid) {
+          localStorage.setItem("email", userData.email);
+          localStorage.setItem("uid", userData.uid);
+        }
         navigate("/");
       })
       .catch((error) => {
