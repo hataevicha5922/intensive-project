@@ -1,29 +1,37 @@
+/* eslint-disable no-console */
 import { Link, useNavigate } from "react-router-dom";
 import s from "./Register.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store/userSlice";
 
 import { UserCredentialsType } from "../../types";
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
-import Input from "../../components/Input/Input";
+import { Input } from "../../components/Input/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 
 export const Register = () => {
+  const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserCredentialsType>({ resolver: yupResolver(schema) });
 
-  const navigate = useNavigate();
-
   const onSubmit = handleSubmit((data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        const userData = userCredential.user;
+        const user = { email: userData.email, userId: userData.uid };
+        dispatch(addUser(user));
+        console.log(user);
         navigate("/");
       })
       .catch((error) => {

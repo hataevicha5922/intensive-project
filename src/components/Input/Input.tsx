@@ -3,7 +3,7 @@ import s from "./Input.module.css";
 import cn from "classnames";
 import { InputProps } from "./Input.props";
 
-const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { isValid = true, className, ...props },
   ref
 ) {
@@ -18,4 +18,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   );
 });
 
-export default Input;
+

@@ -1,9 +1,13 @@
+/* eslint-disable no-console */
 import Button from "../../components/Button/Button";
+import { useAppSelector } from "../../hooks/hook";
 import s from "./Layout.module.css";
 import cn from "classnames";
 import { NavLink, Outlet } from "react-router-dom";
 
 export function Layout() {
+  const email = useAppSelector((state) => state.user.email);
+
   return (
     <div className={s["layout"]}>
       <div className={s["sidebar"]}>
@@ -13,8 +17,7 @@ export function Layout() {
             alt="Avatar"
             className={s["avatar"]}
           />
-          <div className={s["name"]}>Aliaksandr Hramyka</div>
-          <div className={s["email"]}>emil@email.com</div>
+          <div className={s["email"]}>{email}</div>
         </div>
         <div className={s["menu"]}>
           <NavLink
