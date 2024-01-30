@@ -10,7 +10,9 @@ import { Error } from "./pages/Error/Error";
 import Product from "./pages/Product/Product";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
-
+import { AuthLayout } from "./layout/Auth/AuthLayout";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,20 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
+      },
+    ],
+  },
+  {
     path: "*",
     element: <Error />,
   },
@@ -40,7 +56,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );

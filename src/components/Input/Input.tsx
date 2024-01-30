@@ -14,7 +14,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         [s["invalid"]]: isValid,
       })}
       {...props}
-      type="text"
     />
   );
 });
