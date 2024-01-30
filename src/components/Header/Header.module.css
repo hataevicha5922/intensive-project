@@ -1,0 +1,61 @@
+.header {
+  padding: 20px;
+  border-bottom: 1px solid var(--separator-color);
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: white;
+}
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.content {
+  padding: 40px 60px;
+  width: 100%;
+}
+.logo {
+  gap: 5px;
+  position: relative;
+}
+.logo-img {
+  position: absolute;
+  top: -5px;
+  width: 30px;
+  height: 30px;
+}
+.exit {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+.link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+.link::before {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url("../../../public/film-camera-svgrepo-com.svg");
+}
+.info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* .active {
+  color: var(--primary-hover-color);
+} */

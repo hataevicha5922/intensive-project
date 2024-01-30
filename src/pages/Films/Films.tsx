@@ -1,16 +1,14 @@
+/* eslint-disable no-console */
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
-import s from "./Menu.module.css";
 
-import Headling from "../../components/Headling/Headling";
-import Search from "../../components/Search/Search";
 import { URL, KEY } from "../../helpers/API";
 
-import { NewsInterface } from "../../api/api.interface";
-import { MenuList } from "./MenuList/MenuList";
+import { FilmInterface } from "../../api/api.interface";
+import { FilmList } from "./FilmList/FilmList";
 
-export function Menu() {
-  const [responseData, setResponseData] = useState<NewsInterface[]>([]);
+export function Films() {
+  const [responseData, setResponseData] = useState<FilmInterface[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
 
@@ -27,8 +25,9 @@ export function Menu() {
           },
         }
       );
-      const newsData = data.items;
-      setResponseData(newsData);
+      const filmsData = data.items;
+      setResponseData(filmsData);
+      console.log(filmsData);
       setIsLoading(false);
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -45,13 +44,9 @@ export function Menu() {
 
   return (
     <>
-      <div className={s["head"]}>
-        <Headling>Menu</Headling>
-        <Search placeholder="Search" />
-      </div>
       <div>
         {error && <>{error}</>}
-        {!isLoading && <MenuList data={responseData} />}
+        {!isLoading && <FilmList data={responseData} />}
         {isLoading && <>Loading...</>}
       </div>
     </>

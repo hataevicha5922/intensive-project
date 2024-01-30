@@ -1,25 +1,24 @@
+/* eslint-disable no-console */
 import { Link } from "react-router-dom";
-import s from "./ProductCard.module.css";
-import { ProductCatdProps } from "./ProductCard.props";
+import s from "./FilmCard.module.css";
+import { FilmCardProps } from "./FilmCard.props";
 import { useMemo } from "react";
 
-const ProductCart = (props: ProductCatdProps) => {
+export const FilmCart = (props: FilmCardProps) => {
   const cardHeadStyles = useMemo(
     () => ({
       backgroundImage: `url(${props.image})`,
       backgroundSize: "contain",
-      backgroundPosition: "center"
+      backgroundPosition: "center",
     }),
     [props.image]
   );
+
   return (
-    <Link to={`/product/${props.id}`} className={s["link"]}>
+    <Link to={`/film/${props.id}`} className={s["link"]}>
       <div className={s["card"]}>
         <div className={s["card-head"]} style={cardHeadStyles}>
-          <div className={s["price"]}>
-            {props.price}&nbsp;
-            <span className={s["currency"]}>$</span>
-          </div>
+          <div className={s["price"]}>{props.price}</div>
           <button className={s["add-to-card"]}>
             <img src="./public/bag-2-svgrepo-com.svg" alt="AddToCard" />
           </button>
@@ -39,5 +38,3 @@ const ProductCart = (props: ProductCatdProps) => {
     </Link>
   );
 };
-
-export default ProductCart;

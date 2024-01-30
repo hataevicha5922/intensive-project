@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./index.css";
 
-import { Menu } from "./pages/Menu/Menu";
+import { Films } from "./pages/Films/Films";
 import { Cart } from "./pages/Cart/Cart";
 import { Layout } from "./layout/Layout/Layout";
 import { Error } from "./pages/Error/Error";
-import Product from "./pages/Product/Product";
+import { Film } from "./pages/Film/Film";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { AuthLayout } from "./layout/Auth/AuthLayout";
@@ -21,15 +21,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Menu />,
+        element: <Films />,
       },
       {
         path: "/cart",
         element: <Cart />,
       },
       {
-        path: "/product/:id",
-        element: <Product />,
+        path: "/film/:id",
+        element: <Film />,
       },
     ],
   },
