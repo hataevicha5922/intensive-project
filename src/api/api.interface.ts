@@ -21,3 +21,7 @@ export interface FilmInterface {
   type: string;
   year: number;
 }
+
+export interface DataInterface {
+  items: FilmInterface[];
+}
