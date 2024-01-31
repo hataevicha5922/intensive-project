@@ -1,5 +1,3 @@
-// import { GenresType } from "../../api/api.interface";
-
 export interface FilmCardProps {
   id: number;
   title: string | null;

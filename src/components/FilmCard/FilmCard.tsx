@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Link } from "react-router-dom";
 import s from "./FilmCard.module.css";
 import { FilmCardProps } from "./FilmCard.props";

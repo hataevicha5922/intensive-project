@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 
@@ -27,7 +26,6 @@ export function Films() {
       );
       const filmsData = data.items;
       setResponseData(filmsData);
-      console.log(filmsData);
       setIsLoading(false);
     } catch (e) {
       if (e instanceof AxiosError) {

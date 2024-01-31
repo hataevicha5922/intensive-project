@@ -1,13 +1,3 @@
-// export interface FilmInterface {
-//   adspace: string;
-//   body: string;
-//   date: string;
-//   image: string;
-//   live: boolean;
-//   tabTitle: string;
-//   id: string;
-//   title: string;
-// }
 type CountriesType = {
   country: string;
 };
