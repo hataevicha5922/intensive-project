@@ -1,5 +1,19 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { DataInterface } from "../api/api.interface";
+import {
+  DataInterface,
+  FilmResponseInterface,
+  FilmInterface,
+} from "../api/api.interface";
+
+const convertFimlForUi = (data: FilmInterface): FilmResponseInterface => ({
+  description: data.description,
+  genres: data.genres,
+  countries: data.countries,
+  posterUrl: data.posterUrl,
+  ratingKinopoisk: data.ratingKinopoisk,
+  year: data.year,
+  nameRu: data.nameRu,
+});
 
 export const filmSlice = createApi({
   reducerPath: "film",
@@ -20,7 +34,15 @@ export const filmSlice = createApi({
         },
       }),
     }),
+    getFilmInfo: builder.query<FilmResponseInterface, string>({
+      query: (id: string) => ({
+        url: `/api/v2.2/films/${id}`,
+      }),
+      transformResponse: (response: FilmInterface): FilmResponseInterface => {
+        return convertFimlForUi(response);
+      },
+    }),
   }),
 });
 
-export const { useGetFilmsQuery } = filmSlice;
+export const { useGetFilmsQuery, useGetFilmInfoQuery } = filmSlice;
