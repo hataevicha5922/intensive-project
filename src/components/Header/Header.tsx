@@ -1,44 +1,24 @@
-import {  useNavigate } from "react-router-dom";
-import s from "./Header.module.css";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
-import Button from "../Button/Button";
-import { Profile } from "../Profile/Profile";
 import Search from "../Search/Search";
-import { useState } from "react";
 import { Logo } from "../Logo/Logo";
+import { RegistrationGroup } from "../RegistartionGroup";
+
+import s from "./Header.module.css";
+import { ProfileGroup } from "../ProfileGroup";
 
 export const Header = () => {
-  const [isAuth, setIsAuth] = useState(false);
-  const navigate = useNavigate();
+  const { getUser } = useUserAuth("user");
+
+  const user = getUser();
 
   return (
     <div className={s["header"]}>
       <div className={s["header-wrapper"]}>
-       <Logo/>
+        <Logo />
         <Search placeholder="Search" />
         <div className={s["info"]}>
-          {isAuth && <Profile />}
-          {isAuth ? (
-            <Button
-              className={s["exit"]}
-              onClick={() => {
-                setIsAuth(false);
-                navigate("/");
-              }}
-            >
-              LogOut
-            </Button>
-          ) : (
-            <Button
-              className={s["exit"]}
-              onClick={() => {
-                setIsAuth(true);
-                // navigate("/auth/login");
-              }}
-            >
-              LogIn
-            </Button>
-          )}
+          {user ? <ProfileGroup /> : <RegistrationGroup />}
         </div>
       </div>
     </div>

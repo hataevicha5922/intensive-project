@@ -5,6 +5,7 @@ import { auth } from "../../config/firebase-config";
 import { UserCredentialsType } from "../../types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
@@ -15,6 +16,7 @@ import s from "./Login.module.css";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const { logInUser } = useUserAuth("user");
 
   const {
     register,
@@ -25,11 +27,10 @@ export const Login = () => {
   const onSubmit = handleSubmit((data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const userData = userCredential.user;
-        if (userData.email && userData.uid) {
-          localStorage.setItem("email", userData.email);
-          localStorage.setItem("uid", userData.uid);
-        }
+        const { email, uid } = userCredential.user;
+        const user = { email, uid };
+        logInUser(user);
+
         navigate("/");
       })
       .catch((error) => {

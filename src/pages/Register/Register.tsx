@@ -4,6 +4,7 @@ import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
 import { UserCredentialsType } from "../../types";
 import Button from "../../components/Button/Button";
@@ -15,6 +16,7 @@ import s from "./Register.module.css";
 
 export const Register = () => {
   const navigate = useNavigate();
+  const { logInUser } = useUserAuth("user");
 
   const {
     register,
@@ -25,11 +27,8 @@ export const Register = () => {
   const onSubmit = handleSubmit((data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const userData = userCredential.user;
-        if (userData.email && userData.uid) {
-          localStorage.setItem("email", userData.email);
-          localStorage.setItem("uid", userData.uid);
-        }
+        const { email, uid } = userCredential.user;
+        logInUser({ email, uid });
         navigate("/");
       })
       .catch((error) => {
@@ -65,7 +64,7 @@ export const Register = () => {
           />
           <p className={s["error"]}>{errors.password?.message}</p>
         </div>
-        <Button appearence="big">LogIn</Button>
+        <Button appearence="big">Registration</Button>
       </form>
       <div className={s["links"]}>
         <div>I have an account</div>
