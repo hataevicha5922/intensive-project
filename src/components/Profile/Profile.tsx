@@ -1,6 +1,7 @@
 import s from "./Profile.module.css";
 
 export const Profile = () => {
+  const email = localStorage.getItem("email");
   return (
     <div className={s["user"]}>
       <img
@@ -8,7 +9,7 @@ export const Profile = () => {
         alt="Avatar"
         className={s["avatar"]}
       />
-      <div className={s["email"]}>{"Email"}</div>
+      <div className={s["email"]}>{email}</div>
     </div>
   );
 };

@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import s from "./Login.module.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../../config/firebase-config";
 import { UserCredentialsType } from "../../types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../../config/yup-schema";
 
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../config/yup-schema";
+import { Logo } from "../../components/Logo";
+
+import s from "./Login.module.css";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -31,14 +33,16 @@ export const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        throw new Error(error);
       });
   });
 
   return (
     <div className={s["login"]}>
-      <Headling>LogIn</Headling>
+      <div className={s["login-header"]}>
+        <Headling>LogIn</Headling>
+        <Logo />
+      </div>
       <form className={s["form"]} onSubmit={onSubmit}>
         <div className={s["field"]}>
           <label htmlFor="email">Email</label>

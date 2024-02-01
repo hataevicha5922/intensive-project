@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
-import s from "./Register.module.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../../config/yup-schema";
 
 import { UserCredentialsType } from "../../types";
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schema } from "../../config/yup-schema";
+import { Logo } from "../../components/Logo";
+
+import s from "./Register.module.css";
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -31,14 +33,16 @@ export const Register = () => {
         navigate("/");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        throw new Error(error);
       });
   });
 
   return (
     <div className={s["login"]}>
-      <Headling>Registration</Headling>
+      <div className={s["login-header"]}>
+        <Headling>Registration</Headling>
+        <Logo />
+      </div>
       <form className={s["form"]} onSubmit={onSubmit}>
         <div className={s["field"]}>
           <label htmlFor="email">Email</label>

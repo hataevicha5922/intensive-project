@@ -10,6 +10,11 @@
   flex-direction: column;
   gap: 30px;
 }
+.login-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .field {
   display: flex;
   flex-direction: column;
