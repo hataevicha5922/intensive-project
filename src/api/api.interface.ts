@@ -83,15 +83,10 @@ export interface FilmResponseInterface {
   nameRu: string;
   description: string;
 }
-// export interface FilmInfoPropsInter
 export interface FilmInfoPropsInterface {
-  // description: string;
   genres: GenresType[];
   countries: CountriesType[];
   posterUrl: string;
-  // ratingKinopoisk: number;
-  // year: number,
-  // nameRu: string
 }
 
 export interface DescriptionContextInterface {
@@ -99,4 +94,5 @@ export interface DescriptionContextInterface {
   year: number | undefined;
   nameRu: string | undefined;
   description: string | undefined;
+  posterUrl: string | undefined;
 }

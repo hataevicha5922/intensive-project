@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import { store } from "./store/store";
-import { Films } from "./pages/Films/Films";
+// import { Films } from "./pages/Films/Films";
 import { Cart } from "./pages/Cart/Cart";
 import { Layout } from "./layout/Layout/Layout";
 import { Error } from "./pages/Error/Error";
@@ -15,6 +15,8 @@ import { Register } from "./pages/Register/Register";
 
 import "./index.css";
 
+export const Films = lazy(() => import("./pages/Films/Films"));
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,7 +24,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Films />,
+        element: (
+          <Suspense fallback={"Loading..."}>
+            <Films />
+          </Suspense>
+        ),
       },
       {
         path: "/cart",

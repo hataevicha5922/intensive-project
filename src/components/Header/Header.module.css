@@ -19,16 +19,6 @@
   padding: 40px 60px;
   width: 100%;
 }
-.logo {
-  gap: 5px;
-  position: relative;
-}
-.logo-img {
-  position: absolute;
-  top: -5px;
-  width: 30px;
-  height: 30px;
-}
 .exit {
   margin-top: auto;
   display: flex;

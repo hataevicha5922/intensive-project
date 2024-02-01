@@ -14,29 +14,27 @@ export const MyDescriptionFilmContext =
     year: 1,
     nameRu: "",
     description: "",
+    posterUrl: "",
   });
 
 export const Film = () => {
   const params = useParams<ParamsFilmType>();
   const id = params.id!;
-  const { data } = useGetFilmInfoQuery(id);
+  const { data } = useGetFilmInfoQuery(id)!;
 
   const descriptionContext = {
     ratingKinopoisk: data?.ratingKinopoisk,
     year: data?.year,
     nameRu: data?.nameRu,
     description: data?.description,
+    posterUrl: data?.posterUrl,
   };
 
-  if (data) {
-    return (
+  return (
+    data && (
       <MyDescriptionFilmContext.Provider value={descriptionContext}>
-        <FilmInfo
-          posterUrl={data.posterUrl}
-          genres={data.genres}
-          countries={data.countries}
-        />
+        <FilmInfo />
       </MyDescriptionFilmContext.Provider>
-    );
-  }
+    )
+  );
 };
