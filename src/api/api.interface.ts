@@ -96,3 +96,40 @@ export interface DescriptionContextInterface {
   description: string | undefined;
   posterUrl: string | undefined;
 }
+
+export interface UserContextInterface {
+  email: string;
+  uid: string;
+}
+
+export interface FilmSearchResultsInterface {
+  searchTerm: string;
+}
+
+export interface SearchResultInterface {
+  keyword: string;
+  pagesCount: number;
+  films: SearchFilmInterface[];
+  searchFilsCountResult: number;
+}
+
+export interface SearchFilmInterface {
+  countries: CountriesType[];
+  description: string;
+  filmId: number;
+  filmLength: string;
+  genres: GenresType[];
+  nameEn: string;
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  rating: string;
+  ratingVoteCount: number;
+  type: string;
+  year: string;
+}
+
+export interface TransformedSearchFilmsResaultInterface {
+  keyword: string;
+  films: SearchFilmInterface[];
+}

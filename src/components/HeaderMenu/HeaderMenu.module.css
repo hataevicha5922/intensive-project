@@ -1,0 +1,14 @@
+.menu {
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+.menu-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+}
+.active {
+  color: var(--primary-color);
+}

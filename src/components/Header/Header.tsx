@@ -1,11 +1,18 @@
+import { createContext } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
-import Search from "../Search/Search";
 import { Logo } from "../Logo/Logo";
 import { RegistrationGroup } from "../RegistartionGroup";
+import { ProfileGroup } from "../ProfileGroup";
+import { HeaderMenu } from "../HeaderMenu";
+import { UserContextInterface } from "../../api/api.interface";
 
 import s from "./Header.module.css";
-import { ProfileGroup } from "../ProfileGroup";
+
+export const UserContext = createContext<UserContextInterface>({
+  email: "",
+  uid: "",
+});
 
 export const Header = () => {
   const { getUser } = useUserAuth("user");
@@ -16,9 +23,15 @@ export const Header = () => {
     <div className={s["header"]}>
       <div className={s["header-wrapper"]}>
         <Logo />
-        <Search placeholder="Search" />
+        {user && <HeaderMenu />}
         <div className={s["info"]}>
-          {user ? <ProfileGroup /> : <RegistrationGroup />}
+          {user ? (
+            <UserContext.Provider value={JSON.parse(user)}>
+              <ProfileGroup />
+            </UserContext.Provider>
+          ) : (
+            <RegistrationGroup />
+          )}
         </div>
       </div>
     </div>

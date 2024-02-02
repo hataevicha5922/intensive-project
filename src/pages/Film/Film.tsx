@@ -20,7 +20,7 @@ export const MyDescriptionFilmContext =
 export const Film = () => {
   const params = useParams<ParamsFilmType>();
   const id = params.id!;
-  const { data } = useGetFilmInfoQuery(id)!;
+  const { data } = useGetFilmInfoQuery(id);
 
   const descriptionContext = {
     ratingKinopoisk: data?.ratingKinopoisk,
