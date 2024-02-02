@@ -1,3 +1,17 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 1160px;
+  height: 100vh;
+  padding: 20px 0px;
+}
+.search-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 .input-wrapper {
   position: relative;
 }
@@ -9,7 +23,7 @@
   font-weight: 400;
   color: var(--text-color);
   background-color: #fcfcfd;
-  border: 1px solid #efefef;
+  border: 1px solid #dfdcdc;
   box-shadow: 15px 20px 45px 0px rgba(233, 233, 233, 0.25);
   border-radius: 10px;
   padding: 16px 30px 16px 44px;

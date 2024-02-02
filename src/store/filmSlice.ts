@@ -3,16 +3,34 @@ import {
   DataInterface,
   FilmResponseInterface,
   FilmInterface,
+  SearchResultInterface,
+  TransformedSearchFilmsResaultInterface,
 } from "../api/api.interface";
 
-const convertFimlForUi = (data: FilmInterface): FilmResponseInterface => ({
-  description: data.description,
-  genres: data.genres,
-  countries: data.countries,
-  posterUrl: data.posterUrl,
-  ratingKinopoisk: data.ratingKinopoisk,
-  year: data.year,
-  nameRu: data.nameRu,
+const convertFimlForUi = ({
+  description,
+  genres,
+  countries,
+  posterUrl,
+  ratingKinopoisk,
+  year,
+  nameRu,
+}: FilmInterface) => ({
+  description,
+  genres,
+  countries,
+  posterUrl,
+  ratingKinopoisk,
+  year,
+  nameRu,
+});
+
+const convertSearchFilmResponse = ({
+  films,
+  keyword,
+}: SearchResultInterface) => ({
+  keyword,
+  films: films,
 });
 
 export const filmSlice = createApi({
@@ -42,7 +60,18 @@ export const filmSlice = createApi({
         return convertFimlForUi(response);
       },
     }),
+    searchFilm: builder.query<TransformedSearchFilmsResaultInterface, string>({
+      query: (keyword: string) => ({
+        url: `/api/v2.1/films/search-by-keyword?keyword=${keyword}`,
+      }),
+      transformResponse: (
+        response: SearchResultInterface
+      ): TransformedSearchFilmsResaultInterface => {
+        return convertSearchFilmResponse(response);
+      },
+    }),
   }),
 });
 
-export const { useGetFilmsQuery, useGetFilmInfoQuery } = filmSlice;
+export const { useGetFilmsQuery, useGetFilmInfoQuery, useSearchFilmQuery } =
+  filmSlice;
