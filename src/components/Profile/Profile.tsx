@@ -1,10 +1,11 @@
+import { useSelector } from "react-redux";
+
+import { getUserSelector } from "../../store/userSlice/selectors";
+
 import s from "./Profile.module.css";
-import { useUserAuth } from "../../hooks/useUserAuth";
 
 export const Profile = () => {
-  const { getUser } = useUserAuth("user");
-  const user = getUser()!;
-  const userInfo = JSON.parse(user);
+  const userInfo = useSelector(getUserSelector)!;
 
   return (
     <div className={s["user"]}>

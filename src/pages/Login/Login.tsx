@@ -5,20 +5,19 @@ import { auth } from "../../config/firebase-config";
 import { UserCredentialsType } from "../../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
-import { useUserAuth } from "../../hooks/useUserAuth";
 
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store";
+import { logInUser } from "../../utils";
 
 import s from "./Login.module.css";
-import { useAppDispatch } from "../../hooks/hook";
-import { addUser } from "../../store/userSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
-  const { logInUser } = useUserAuth("user");
   const dispatch = useAppDispatch();
 
   const {
@@ -33,7 +32,7 @@ export const Login = () => {
         const user = userCredential.user!;
 
         logInUser({ email: user.email!, uid: user.uid });
-        dispatch(addUser({ email: user.email!, uid: user.uid }));
+        dispatch(addUser(user));
 
         navigate("/");
       })

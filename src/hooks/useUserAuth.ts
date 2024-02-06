@@ -1,24 +1,12 @@
-import { signOut } from "firebase/auth";
-import { auth } from "../config/firebase-config";
-import { UserContextInterface } from "../types/types";
+import { useEffect } from "react";
+import { addUser, store } from "../store";
+import { getUser } from "../utils";
 
-export const useUserAuth = (key: string) => {
-  const logInUser = (value: UserContextInterface) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-
-  const getUser = () => {
-    return localStorage.getItem(key);
-  };
-
-  const logOutUser = async () => {
-    try {
-      await signOut(auth);
-      localStorage.removeItem(key);
-    } catch (error) {
-      console.error(error);
+export const useUserAuth = () => {
+  useEffect(() => {
+    const user = getUser();
+    if (user) {
+      store.dispatch(addUser(user));
     }
-  };
-
-  return { logInUser, getUser, logOutUser };
+  }, []);
 };

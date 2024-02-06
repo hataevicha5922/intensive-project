@@ -11,6 +11,7 @@ import {
   Register,
   Error,
 } from "../../pages";
+import { useUserAuth } from "../../hooks";
 
 export const FilmsPage = lazy(() => import("../../pages/FilmsPage/FilmsPage"));
 
@@ -66,5 +67,7 @@ const router = createBrowserRouter([
 ]);
 
 export const MainRouter = () => {
+  useUserAuth();
+
   return <RouterProvider router={router} />;
 };
