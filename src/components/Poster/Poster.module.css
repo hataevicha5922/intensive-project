@@ -1,0 +1,11 @@
+.poster-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+}
+.poster {
+  max-width: 300px;
+  max-height: 400px;
+}

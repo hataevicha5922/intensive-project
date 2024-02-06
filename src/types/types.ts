@@ -13,7 +13,7 @@ export interface FilmsInterface {
   kinopoiskId: number;
   nameEn: string | null;
   nameOriginal: string | null;
-  nameRu: string | null;
+  nameRu: string;
   posterUrl: string;
   posterUrlPreview: string;
   ratingImdb: number;
@@ -95,6 +95,7 @@ export interface DescriptionContextInterface {
   nameRu: string | undefined;
   description: string | undefined;
   posterUrl: string | undefined;
+  id: string | undefined
 }
 
 export interface UserContextInterface {
@@ -132,4 +133,22 @@ export interface SearchFilmInterface {
 export interface TransformedSearchFilmsResaultInterface {
   keyword: string;
   films: SearchFilmInterface[];
+}
+
+export type UserCredentialsType = {
+  email: string;
+  password: string;
+};
+
+export interface DataBaseInterface {
+  id: number;
+  posterUrl: string;
+  description: string;
+  nameRu: string;
+  ratingKinopoisk: number;
+  year: number;
+}
+
+export interface LocalInterface extends DataBaseInterface {
+  filmId: string;
 }

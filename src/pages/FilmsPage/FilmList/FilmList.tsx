@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
 import s from "./FilmList.module.css";
-import { FilmCart } from "../../../components/FilmCard/FilmCard";
+import { FilmCart } from "../../../components/FilmCart/FilmCart";
 import { FilmListPropsType } from "./FilmList.props";
 
 export const FilmList = ({ data }: FilmListPropsType) => {
-
-
   return (
     <div className={s["list-wrapper"]}>
       {data.map((item) => (
@@ -14,9 +12,10 @@ export const FilmList = ({ data }: FilmListPropsType) => {
           id={item.kinopoiskId}
           title={item.nameOriginal || item.nameRu}
           description={item.type}
-          price={item.year}
+          name={item.nameRu}
           rating={item.ratingImdb || item.ratingKinopoisk}
           image={item.posterUrlPreview}
+          year={item.year}
         />
       ))}
     </div>

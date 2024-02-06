@@ -1,9 +1,10 @@
-import { useContext } from "react";
 import s from "./Profile.module.css";
-import { UserContext } from "../Header";
+import { useUserAuth } from "../../hooks/useUserAuth";
 
 export const Profile = () => {
-  const { email } = useContext(UserContext);
+  const { getUser } = useUserAuth("user");
+  const user = getUser()!;
+  const userInfo = JSON.parse(user);
 
   return (
     <div className={s["user"]}>
@@ -12,7 +13,7 @@ export const Profile = () => {
         alt="Avatar"
         className={s["avatar"]}
       />
-      <div className={s["email"]}>{email}</div>
+      <div className={s["email"]}>{userInfo.email}</div>
     </div>
   );
 };

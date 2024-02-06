@@ -1,0 +1,30 @@
+.film-description-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.film-description-statistics {
+  display: flex;
+}
+.year {
+  margin-right: 20px;
+}
+.year span {
+  font-weight: 600;
+}
+.rating span {
+  font-weight: 600;
+}
+
+.favorites-button {
+  max-height: 50px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.favorites-button:hover {
+  background-color: var(--primary-hover-color);
+}

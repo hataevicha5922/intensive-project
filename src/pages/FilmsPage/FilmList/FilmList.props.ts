@@ -1,4 +1,4 @@
-import { FilmsInterface } from "../../../api/api.interface";
+import { FilmsInterface } from "../../../types/types";
 
 export interface FilmListPropsType {
   data: FilmsInterface[];

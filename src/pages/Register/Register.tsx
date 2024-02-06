@@ -6,17 +6,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 import { useUserAuth } from "../../hooks/useUserAuth";
 
-import { UserCredentialsType } from "../../types";
+import { UserCredentialsType } from "../../types/types";
 import Button from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
 
 import s from "./Register.module.css";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store/userSlice";
 
 export const Register = () => {
   const navigate = useNavigate();
   const { logInUser } = useUserAuth("user");
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -27,8 +30,9 @@ export const Register = () => {
   const onSubmit = handleSubmit((data) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const { email, uid } = userCredential.user;
-        logInUser({ email, uid });
+        const user = userCredential.user;
+        logInUser({ email: user.email!, uid: user.uid! });
+        dispatch(addUser(user));
         navigate("/");
       })
       .catch((error) => {

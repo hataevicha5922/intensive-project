@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { createContext } from "react";
-import { DescriptionContextInterface } from "../../api/api.interface";
+import { DescriptionContextInterface } from "../../types/types";
 import { FilmInfo } from "../../components/FilmInfo/FilmInfo";
 import { useGetFilmInfoQuery } from "../../store/filmSlice";
 
@@ -15,6 +15,7 @@ export const MyDescriptionFilmContext =
     nameRu: "",
     description: "",
     posterUrl: "",
+    id: ""
   });
 
 export const Film = () => {
@@ -28,6 +29,7 @@ export const Film = () => {
     nameRu: data?.nameRu,
     description: data?.description,
     posterUrl: data?.posterUrl,
+    id: id
   };
 
   return (

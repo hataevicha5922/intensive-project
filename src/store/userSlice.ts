@@ -1,25 +1,30 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { auth } from "../config/firebase-config";
+
+interface UserInterface {
+  email: string;
+  uid: string;
+}
 
 export type UserState = {
-  email: string;
-  userId: string;
+  authorize: boolean;
+  user: UserInterface | null;
 };
 
 const initialState: UserState = {
-  email: "",
-  userId: "",
+  authorize: !!auth,
+  user: null,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<UserState>) => {
-      state.userId = action.payload.userId;
-      state.email = action.payload.email;
+    addUser: (state, action) => {
+      state.user = action.payload;
     },
     logOut: (state) => {
-      state.userId = "";
+      state.user = null;
     },
   },
 });

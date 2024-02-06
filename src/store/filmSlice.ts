@@ -5,7 +5,7 @@ import {
   FilmInterface,
   SearchResultInterface,
   TransformedSearchFilmsResaultInterface,
-} from "../api/api.interface";
+} from "../types/types";
 
 const convertFimlForUi = ({
   description,

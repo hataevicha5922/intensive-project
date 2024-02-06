@@ -4,6 +4,7 @@
   border-radius: 19px;
   width: 320px;
   text-decoration: none;
+  min-height: 250px;
 }
 .card-head {
   position: relative;
@@ -49,20 +50,18 @@
   font-size: 12px;
   box-shadow: 0px 6px 24px 0px rgba(254, 114, 76, 0.2);
 }
-.add-to-card {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  background: var(--primary-color);
-  border: none;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  cursor: pointer;
+.add-to-favorites {
+  text-decoration: none;
+ 
 }
-.add-to-card:hover {
-  background: var(--primary-hover-color);
+.add-to-favorites:hover {
+  color: var(--primary-hover-color);
 }
 .link {
   text-decoration: none;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

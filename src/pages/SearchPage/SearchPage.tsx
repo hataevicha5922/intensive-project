@@ -7,7 +7,7 @@ import { useDebounce } from "../../hooks/useDebounce";
 
 export const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 2000);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) =>
     setSearchTerm(e.target.value);

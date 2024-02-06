@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../../config/firebase-config";
-import { UserCredentialsType } from "../../types";
+import { UserCredentialsType } from "../../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 import { useUserAuth } from "../../hooks/useUserAuth";
@@ -13,10 +13,13 @@ import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
 
 import s from "./Login.module.css";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store/userSlice";
 
 export const Login = () => {
   const navigate = useNavigate();
   const { logInUser } = useUserAuth("user");
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -27,9 +30,10 @@ export const Login = () => {
   const onSubmit = handleSubmit((data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        const { email, uid } = userCredential.user;
-        const user = { email, uid };
-        logInUser(user);
+        const user = userCredential.user!;
+
+        logInUser({ email: user.email!, uid: user.uid });
+        dispatch(addUser({ email: user.email!, uid: user.uid }));
 
         navigate("/");
       })

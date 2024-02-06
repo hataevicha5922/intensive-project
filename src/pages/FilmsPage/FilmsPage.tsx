@@ -2,7 +2,7 @@ import { useGetFilmsQuery } from "../../store/filmSlice";
 
 import { FilmList } from "./FilmList/FilmList";
 
-function Films() {
+export default function FilmsPage() {
   const { data, isLoading, error } = useGetFilmsQuery(5);
 
   if (data) {
@@ -17,5 +17,3 @@ function Films() {
     );
   }
 }
-
-export default Films;

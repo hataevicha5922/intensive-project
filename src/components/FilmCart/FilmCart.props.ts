@@ -1,8 +1,8 @@
 export interface FilmCardProps {
   id: number;
   title: string | null;
-  description: string;
   image: string;
-  price: number;
+  year: number;
   rating: number;
+  name: string;
 }
