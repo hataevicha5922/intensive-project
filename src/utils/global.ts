@@ -1,5 +1,12 @@
 import { signOut } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 
 import { auth, db } from "../config/firebase-config";
 import { UserContextInterface } from "./utils-types";
@@ -33,4 +40,25 @@ export const getFavoritesFilms = async (userEmail: string) => {
   }));
 
   store.dispatch(setFavorites(favoriteFilms));
+};
+
+export const addToFavorites = async (
+  value: FilmInterface,
+  userEmail: string
+) => {
+  try {
+    await setDoc(doc(db, `${userEmail}favorites`, String(value.id)), value);
+    await getFavoritesFilms(userEmail);
+  } catch (error) {
+    console.error(`Error from Firebase ${error}`);
+  }
+};
+
+export const removeToFavorites = async (id: number, userEmail: string) => {
+  try {
+    await deleteDoc(doc(db, `${userEmail}favorites`, String(id)));
+    await getFavoritesFilms(userEmail);
+  } catch (error) {
+    console.error(`Error from Firebase ${error}`);
+  }
 };

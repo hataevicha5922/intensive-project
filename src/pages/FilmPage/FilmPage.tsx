@@ -11,7 +11,7 @@ export const FilmPage = () => {
   const params = useParams<ParamsFilmType>();
   const id = params.id!;
   const { data } = useGetFilmInfoQuery(id);
-
+    
   return (
     data && (
       <div className={s["film-wrapper"]}>

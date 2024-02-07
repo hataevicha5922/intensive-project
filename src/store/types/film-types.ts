@@ -1,7 +1,7 @@
 import { CountriesType, FilmsInterface, GenresType } from "../../types/types";
 
 export interface FilmResponseInterface {
-  id: number;
+  kinopoiskId: number;
   posterUrl: string;
   genres: GenresType[];
   countries: CountriesType[];

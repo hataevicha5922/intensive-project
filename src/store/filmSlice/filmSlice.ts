@@ -7,20 +7,20 @@ import {
   TransformedSearchFilmsResultInterface,
 } from "../types";
 
-const convertFimlForUi = ({
-  id,
+const convertFilmForUi = ({
+  kinopoiskId,
   description,
   posterUrl,
   ratingKinopoisk,
   year,
   nameRu,
 }: FilmResponseInterface): FilmInterface => ({
-  id,
+  id: kinopoiskId,
   description,
   posterUrl,
   ratingKinopoisk,
   year,
-  nameRu,
+  nameRu: nameRu ?? description,
 });
 
 const convertSearchFilmResponse = ({
@@ -50,14 +50,12 @@ export const filmSlice = createApi({
         },
       }),
     }),
-    getFilmInfo: builder.query<FilmResponseInterface, string>({
+    getFilmInfo: builder.query<FilmInterface, string>({
       query: (id: string) => ({
         url: `/api/v2.2/films/${id}`,
       }),
-      transformResponse: (
-        response: FilmInterfaceFromApi
-      ): FilmResponseInterface => {
-        return convertFimlForUi(response);
+      transformResponse: (response: FilmInterfaceFromApi): FilmInterface => {
+        return convertFilmForUi(response);
       },
     }),
     searchFilm: builder.query<TransformedSearchFilmsResultInterface, string>({

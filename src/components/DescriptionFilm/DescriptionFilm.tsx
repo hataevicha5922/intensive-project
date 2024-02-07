@@ -1,24 +1,33 @@
-
 import { useMemo } from "react";
 
 import { useAppSelector } from "../../hooks";
-import { useFavorites } from "../../hooks/useFavorites";
-import { getUserSelector } from "../../store";
+import { getFavoriteFilmsSelector, getUserSelector } from "../../store";
 import { FilmInterface } from "../../types/types";
+import { addToFavorites, removeToFavorites } from "../../utils";
 
 import s from "./DescriptionFilm.module.css";
 
 export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
-  const { nameRu, description, ratingKinopoisk, year } = film;
+  const { nameRu, description, ratingKinopoisk, year, id } = film;
 
+  const favoritesFilms = useAppSelector(getFavoriteFilmsSelector);
   const user = useAppSelector(getUserSelector)!;
-  const userEmail = useMemo(() => user?.email, [user]);
 
-  const { addToFavorites } = useFavorites(`${userEmail}`);
+  const userEmail = useMemo(() => user?.email, [user]);
+  const isFavorite = useMemo<boolean>(
+    () => Boolean(favoritesFilms.find((film) => film.id === id)),
+    [favoritesFilms, id]
+  );
 
   const addToFavoritesHandler = () => {
     if (userEmail) {
-      addToFavorites(film);
+      addToFavorites(film, userEmail);
+    }
+  };
+
+  const removeFromFavoritesHandler = () => {
+    if (userEmail) {
+      removeToFavorites(id, userEmail);
     }
   };
 
@@ -35,12 +44,21 @@ export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
             Raiting <span> {ratingKinopoisk}</span>
           </p>
         </div>
-        <button
-          className={s["favorites-button"]}
-          onClick={addToFavoritesHandler}
-        >
-          Favorites
-        </button>
+        {isFavorite ? (
+          <button
+            className={s["favorites-button"]}
+            onClick={removeFromFavoritesHandler}
+          >
+            remove from Favorites
+          </button>
+        ) : (
+          <button
+            className={s["favorites-button"]}
+            onClick={addToFavoritesHandler}
+          >
+            add to Favorites
+          </button>
+        )}
       </div>
     </div>
   );
