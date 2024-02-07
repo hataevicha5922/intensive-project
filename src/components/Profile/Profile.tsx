@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useSelector } from "react-redux";
+
+import { getUserSelector } from "../../store/userSlice/selectors";
+
 import s from "./Profile.module.css";
-import { UserContext } from "../Header";
 
 export const Profile = () => {
-  const { email } = useContext(UserContext);
+  const userInfo = useSelector(getUserSelector)!;
 
   return (
     <div className={s["user"]}>
@@ -12,7 +14,7 @@ export const Profile = () => {
         alt="Avatar"
         className={s["avatar"]}
       />
-      <div className={s["email"]}>{email}</div>
+      <div className={s["email"]}>{userInfo.email}</div>
     </div>
   );
 };

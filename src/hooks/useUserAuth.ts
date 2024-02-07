@@ -1,15 +1,12 @@
-export const useUserAuth = (key: string) => {
-  const logInUser = (value: unknown) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
+import { useEffect } from "react";
+import { addUser, store } from "../store";
+import { getUser } from "../utils";
 
-  const getUser = () => {
-    return localStorage.getItem(key);
-  };
-
-  const logOutUser = () => {
-    localStorage.removeItem(key);
-  };
-
-  return { logInUser, getUser, logOutUser };
+export const useUserAuth = () => {
+  useEffect(() => {
+    const user = getUser();
+    if (user) {
+      store.dispatch(addUser(user));
+    }
+  }, []);
 };

@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { FilmInterface } from "../types/types";
 import {
-  DataInterface,
   FilmResponseInterface,
-  FilmInterface,
+  DataInterface,
   SearchResultInterface,
-  TransformedSearchFilmsResaultInterface,
-} from "../api/api.interface";
+  TransformedSearchFilmsResultInterface,
+} from "./types";
 
 const convertFimlForUi = ({
   description,
@@ -60,13 +60,13 @@ export const filmSlice = createApi({
         return convertFimlForUi(response);
       },
     }),
-    searchFilm: builder.query<TransformedSearchFilmsResaultInterface, string>({
+    searchFilm: builder.query<TransformedSearchFilmsResultInterface, string>({
       query: (keyword: string) => ({
         url: `/api/v2.1/films/search-by-keyword?keyword=${keyword}`,
       }),
       transformResponse: (
         response: SearchResultInterface
-      ): TransformedSearchFilmsResaultInterface => {
+      ): TransformedSearchFilmsResultInterface => {
         return convertSearchFilmResponse(response);
       },
     }),

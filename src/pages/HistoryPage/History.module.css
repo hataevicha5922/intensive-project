@@ -1,0 +1,8 @@
+.history-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px 0px;
+}

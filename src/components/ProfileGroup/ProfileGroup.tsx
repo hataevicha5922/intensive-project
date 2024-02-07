@@ -1,25 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import { useUserAuth } from "../../hooks/useUserAuth";
+import { useDispatch } from "react-redux";
 
-import Button from "../Button/Button";
+import { logOut } from "../../store/userSlice/userSlice";
+import { Button } from "../Button/Button";
 import { Profile } from "../Profile";
+import { AppDispatch } from "../../store/store";
+import { logOutUser } from "../../utils";
 
 import s from "./ProfileGroup.module.css";
 
 export const ProfileGroup = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { logOutUser } = useUserAuth("user");
+
+  const logOutHandler = () => {
+    logOutUser();
+    dispatch(logOut());
+    navigate("/auth/login");
+  };
 
   return (
     <>
       <Profile />
-      <Button
-        className={s["exit"]}
-        onClick={() => {
-          navigate("/");
-          logOutUser();
-        }}
-      >
+      <Button className={s["exit"]} onClick={logOutHandler}>
         LogOut
       </Button>
     </>
