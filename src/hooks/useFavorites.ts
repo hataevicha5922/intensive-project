@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
@@ -11,6 +10,7 @@ export interface FavoritesFilmInterface {
   id: string | undefined
 
 }
+
 
 export const useFavorites = (key: string) => {
   const addToFavorites = async (value: FavoritesFilmInterface) => {

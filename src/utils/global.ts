@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 
 import { auth } from "../config/firebase-config";
-import { UserContextInterface } from "../types/types";
+import { UserContextInterface } from "./utils-types";
 
 export const getUser = () => {
   const userData = localStorage.getItem("user");
@@ -21,3 +21,4 @@ export const logOutUser = async () => {
     console.error(error);
   }
 };
+

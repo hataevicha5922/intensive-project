@@ -2,23 +2,22 @@ import { useMemo } from "react";
 import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
-import { FilmCardProps } from "./FilmCart.props";
 import { useHistory } from "../../hooks/useHistory";
-// import { useAppSelector } from "../../hooks/hook";
+
+import { FilmCardProps } from "./FilmCart.props";
 
 import s from "./FilmCart.module.css";
 
 export const FilmCart = ({
   name,
-  // description,
   id,
   image,
   rating,
   title,
   year,
 }: FilmCardProps) => {
-  // const isAuth = useAppSelector((state) => state.user.user);
   const auth = getAuth();
+  const user = auth.currentUser;
   const userId = auth.currentUser?.uid;
   const userEmail = auth.currentUser?.email;
 
@@ -27,7 +26,6 @@ export const FilmCart = ({
   const addToHistoryHandler = () => {
     if (userId) {
       addToHistory({
-        // description: description,
         nameRu: name,
         posterUrl: image,
         ratingKinopoisk: rating,
@@ -62,7 +60,7 @@ export const FilmCart = ({
       <div className={s["card-footer"]}>
         <div className={s["title"]}>{title}</div>
         <div>
-          {auth ? (
+          {user ? (
             <Link
               to={`/film/${id}`}
               className={s["add-to-favorites"]}

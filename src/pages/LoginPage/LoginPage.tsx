@@ -6,7 +6,7 @@ import { UserCredentialsType } from "../../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 
-import Button from "../../components/Button/Button";
+import { Button } from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
@@ -14,9 +14,9 @@ import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
 import { logInUser } from "../../utils";
 
-import s from "./Login.module.css";
+import s from "./LoginPage.module.css";
 
-export const Login = () => {
+export const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

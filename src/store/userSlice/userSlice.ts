@@ -1,15 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { auth } from "../../config/firebase-config";
-
-interface UserInterface {
-  email: string;
-  uid: string;
-}
-
-export type UserState = {
-  authorize: boolean;
-  user: UserInterface | null;
-};
+import { UserState } from "../types";
 
 export const initialState: UserState = {
   authorize: !!auth,

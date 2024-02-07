@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { FilmSearchResultsInterface } from "../../types/types";
+
 import { useSearchFilmQuery } from "../../store/filmSlice";
 
-import s from "./FilmSearchResults.module.css";
 import { FilmCart } from "../FilmCart";
+import { FilmSearchResultsInterface } from "./FilmSearchResult.props";
+
+import s from "./FilmSearchResults.module.css";
 
 export const FilmSearchResults = ({
   searchTerm,
@@ -42,11 +44,10 @@ export const FilmSearchResults = ({
           key={item.filmId}
           id={item.filmId}
           title={item.nameEn || item.nameRu}
-          description={item.type}
           rating={+item.rating || item.ratingVoteCount}
           image={item.posterUrlPreview}
           name={"Name"}
-          year={item.year}
+          year={+item.year}
         />
       ))}
     </div>

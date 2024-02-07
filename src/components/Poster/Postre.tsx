@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { MyDescriptionFilmContext } from "../../pages/Film";
+import { MyDescriptionFilmContext } from "../../pages/FilmPage";
 
 import s from "./Poster.module.css";
 

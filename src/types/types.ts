@@ -22,10 +22,6 @@ export interface FilmsInterface {
   year: number;
 }
 
-export interface DataInterface {
-  items: FilmsInterface[];
-}
-
 export interface FilmInterface {
   kinopoiskId: number;
   kinopoiskHDId: string;
@@ -74,15 +70,6 @@ export interface FilmInterface {
   completed: boolean;
 }
 
-export interface FilmResponseInterface {
-  posterUrl: string;
-  genres: GenresType[];
-  countries: CountriesType[];
-  ratingKinopoisk: number;
-  year: number;
-  nameRu: string;
-  description: string;
-}
 export interface FilmInfoPropsInterface {
   genres: GenresType[];
   countries: CountriesType[];
@@ -95,44 +82,7 @@ export interface DescriptionContextInterface {
   nameRu: string | undefined;
   description: string | undefined;
   posterUrl: string | undefined;
-  id: string | undefined
-}
-
-export interface UserContextInterface {
-  email: string;
-  uid: string;
-}
-
-export interface FilmSearchResultsInterface {
-  searchTerm: string;
-}
-
-export interface SearchResultInterface {
-  keyword: string;
-  pagesCount: number;
-  films: SearchFilmInterface[];
-  searchFilsCountResult: number;
-}
-
-export interface SearchFilmInterface {
-  countries: CountriesType[];
-  description: string;
-  filmId: number;
-  filmLength: string;
-  genres: GenresType[];
-  nameEn: string;
-  nameRu: string;
-  posterUrl: string;
-  posterUrlPreview: string;
-  rating: string;
-  ratingVoteCount: number;
-  type: string;
-  year: string;
-}
-
-export interface TransformedSearchFilmsResaultInterface {
-  keyword: string;
-  films: SearchFilmInterface[];
+  id: string | undefined;
 }
 
 export type UserCredentialsType = {
@@ -152,3 +102,7 @@ export interface DataBaseInterface {
 export interface LocalInterface extends DataBaseInterface {
   filmId: string;
 }
+
+export type ParamsFilmType = {
+  id: string;
+};

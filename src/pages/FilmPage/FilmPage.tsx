@@ -1,12 +1,9 @@
 import { useParams } from "react-router-dom";
 import { createContext } from "react";
-import { DescriptionContextInterface } from "../../types/types";
+
+import { DescriptionContextInterface, ParamsFilmType } from "../../types/types";
 import { FilmInfo } from "../../components/FilmInfo/FilmInfo";
 import { useGetFilmInfoQuery } from "../../store/filmSlice";
-
-type ParamsFilmType = {
-  id: string;
-};
 
 export const MyDescriptionFilmContext =
   createContext<DescriptionContextInterface>({
@@ -15,10 +12,10 @@ export const MyDescriptionFilmContext =
     nameRu: "",
     description: "",
     posterUrl: "",
-    id: ""
+    id: "",
   });
 
-export const Film = () => {
+export const FilmPage = () => {
   const params = useParams<ParamsFilmType>();
   const id = params.id!;
   const { data } = useGetFilmInfoQuery(id);
@@ -29,7 +26,7 @@ export const Film = () => {
     nameRu: data?.nameRu,
     description: data?.description,
     posterUrl: data?.posterUrl,
-    id: id
+    id: id,
   };
 
   return (

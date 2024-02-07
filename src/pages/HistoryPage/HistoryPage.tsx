@@ -4,13 +4,13 @@ import { getDocs, collection } from "firebase/firestore";
 
 import { db } from "../../config/firebase-config";
 
+import Headling from "../../components/Headling/Headling";
 import { FilmCart } from "../../components/FilmCart";
 import { LocalInterface, DataBaseInterface } from "../../types/types";
 
 import s from "./History.module.css";
-import Headling from "../../components/Headling/Headling";
 
-export const History = () => {
+export default function HistoryPage() {
   const [historyFilms, setHistoryfilms] = useState<LocalInterface[]>([]);
   const isAuth = getAuth();
   const userEmail = isAuth.currentUser?.email;
@@ -49,4 +49,4 @@ export const History = () => {
       </div>
     </>
   );
-};
+}

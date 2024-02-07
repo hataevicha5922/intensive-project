@@ -3,7 +3,7 @@ import s from "./Button.module.css";
 import cn from "classnames";
 import { ButtonProps } from "./Button.props";
 
-const Button: FC<ButtonProps> = ({
+export const Button: FC<ButtonProps> = ({
   children,
   className,
   appearence = "small",
@@ -21,4 +21,4 @@ const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-export default Button;
+// export default Button;

@@ -4,16 +4,20 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { MainLayout, AuthLayout } from "../../layouts";
 import {
   SearchPage,
-  History,
-  Favorites,
-  Film,
-  Login,
-  Register,
-  Error,
+  FilmPage,
+  LoginPage,
+  RegisterPage,
+  ErrorPage,
 } from "../../pages";
 import { useUserAuth } from "../../hooks";
 
 export const FilmsPage = lazy(() => import("../../pages/FilmsPage/FilmsPage"));
+export const HistoryPage = lazy(
+  () => import("../../pages/HistoryPage/HistoryPage")
+);
+export const FavoritesPage = lazy(
+  () => import("../../pages/FavoritesPage/FavoritesPage")
+);
 
 const router = createBrowserRouter([
   {
@@ -34,15 +38,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/history",
-        element: <History />,
+        element: (
+          <Suspense fallback={"Loading"}>
+            <HistoryPage />
+          </Suspense>
+        ),
       },
       {
         path: "favorites",
-        element: <Favorites />,
+        element: (
+          <Suspense fallback={"Loading..."}>
+            <FavoritesPage />
+          </Suspense>
+        ),
       },
       {
         path: "/film/:id",
-        element: <Film />,
+        element: <FilmPage />,
       },
     ],
   },
@@ -52,17 +64,17 @@ const router = createBrowserRouter([
     children: [
       {
         path: "login",
-        element: <Login />,
+        element: <LoginPage />,
       },
       {
         path: "register",
-        element: <Register />,
+        element: <RegisterPage />,
       },
     ],
   },
   {
     path: "*",
-    element: <Error />,
+    element: <ErrorPage />,
   },
 ]);
 

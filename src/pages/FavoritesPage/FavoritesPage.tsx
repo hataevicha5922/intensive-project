@@ -7,10 +7,10 @@ import { db } from "../../config/firebase-config";
 import { FilmCart } from "../../components/FilmCart";
 import { LocalInterface, DataBaseInterface } from "../../types/types";
 
-import s from "./Favoites.module.css";
+import s from "./FavoritesPage.module.css";
 
-export const Favorites = () => {
-  const [favoritesFilms, setFavoritesfilms] = useState<LocalInterface[]>([]);
+export default function FavoritesPage() {
+  const [favoritesFilms, setFavoritesFilms] = useState<LocalInterface[]>([]);
   const isAuth = getAuth();
   const userEmail = isAuth.currentUser?.email;
 
@@ -18,7 +18,7 @@ export const Favorites = () => {
     const favRef = collection(db, `${userEmail}favorites`);
     const getFavoritesFilms = async () => {
       const data = await getDocs(favRef);
-      setFavoritesfilms(
+      setFavoritesFilms(
         data.docs.map((doc) => ({
           ...(doc.data() as DataBaseInterface),
           filmId: doc.id,
@@ -45,4 +45,4 @@ export const Favorites = () => {
       })}
     </div>
   );
-};
+}

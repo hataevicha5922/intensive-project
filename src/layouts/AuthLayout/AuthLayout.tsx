@@ -1,6 +1,8 @@
-import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
-import s from "./AuthLayout.module.css";
 import { Outlet } from "react-router-dom";
+
+import ErrorBoundary from "../../components/ErrorBoundary/ErrorBoundary";
+
+import s from "./AuthLayout.module.css";
 
 export const AuthLayout = () => {
   return (

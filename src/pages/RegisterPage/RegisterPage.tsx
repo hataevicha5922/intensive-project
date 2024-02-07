@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 
 import { UserCredentialsType } from "../../types/types";
-import Button from "../../components/Button/Button";
+import { Button } from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
@@ -14,9 +14,9 @@ import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store/userSlice/userSlice";
 import { logInUser } from "../../utils";
 
-import s from "./Register.module.css";
+import s from "./RegisterPage.module.css";
 
-export const Register = () => {
+export const RegisterPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 

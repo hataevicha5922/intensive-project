@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
-export interface FavoritesFilmInterface {
+export interface HistoryFilmInterface {
   id: number;
   posterUrl: string;
   nameRu: string;
@@ -11,7 +10,7 @@ export interface FavoritesFilmInterface {
 }
 
 export const useHistory = (key: string) => {
-  const addToHistory = async (value: FavoritesFilmInterface) => {
+  const addToHistory = async (value: HistoryFilmInterface) => {
     try {
       await addDoc(collection(db, `${key}history`), value);
     } catch (error) {

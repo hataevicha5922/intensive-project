@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logOut } from "../../store/userSlice/userSlice";
-import Button from "../Button/Button";
+import { Button } from "../Button/Button";
 import { Profile } from "../Profile";
 import { AppDispatch } from "../../store/store";
 import { logOutUser } from "../../utils";
