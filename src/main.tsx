@@ -3,15 +3,14 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 
 import { store } from "./store";
-
-import { MainRouter } from "./components/MainRouter";
+import { GlobalLayout } from "./layouts";
 
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <MainRouter />
+      <GlobalLayout />
     </Provider>
   </React.StrictMode>
 );

@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { FilmInterface } from "../types/types";
+import { FilmInterface } from "../../types/types";
 import {
   FilmResponseInterface,
   DataInterface,
   SearchResultInterface,
   TransformedSearchFilmsResultInterface,
-} from "./types";
+} from "../types";
 
 const convertFimlForUi = ({
   description,

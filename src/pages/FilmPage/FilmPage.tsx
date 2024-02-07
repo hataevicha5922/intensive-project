@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 import { DescriptionContextInterface, ParamsFilmType } from "../../types/types";
 import { FilmInfo } from "../../components/FilmInfo/FilmInfo";
-import { useGetFilmInfoQuery } from "../../store/filmSlice";
+import { useGetFilmInfoQuery } from "../../store/filmSlice/filmSlice";
 
 export const MyDescriptionFilmContext =
   createContext<DescriptionContextInterface>({

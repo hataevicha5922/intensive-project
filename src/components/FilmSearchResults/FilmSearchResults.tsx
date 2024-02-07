@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { useSearchFilmQuery } from "../../store/filmSlice";
+import { useSearchFilmQuery } from "../../store/filmSlice/filmSlice";
 
 import { FilmCart } from "../FilmCart";
 import { FilmSearchResultsInterface } from "./FilmSearchResult.props";

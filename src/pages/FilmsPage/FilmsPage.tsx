@@ -1,4 +1,4 @@
-import { useGetFilmsQuery } from "../../store/filmSlice";
+import { useGetFilmsQuery } from "../../store/filmSlice/filmSlice";
 
 import { FilmList } from "./FilmList/FilmList";
 

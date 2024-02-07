@@ -1,16 +1,6 @@
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-
-export interface FavoritesFilmInterface {
-  posterUrl: string | undefined;
-  description: string | undefined;
-  nameRu: string | undefined;
-  ratingKinopoisk: number | undefined ;
-  year: number | undefined;
-  id: string | undefined
-
-}
-
+import { FavoritesFilmInterface } from "../store";
 
 export const useFavorites = (key: string) => {
   const addToFavorites = async (value: FavoritesFilmInterface) => {

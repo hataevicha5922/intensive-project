@@ -38,5 +38,7 @@
   color: var(--primary-color);
 }
 .error {
+  width: 100%;
   color: red;
+  text-align: center;
 }
