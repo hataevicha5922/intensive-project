@@ -1,13 +1,6 @@
-export interface FavoritesFilmInterface {
-  id: number;
-  posterUrl: string;
-  description: string;
-  nameRu: string;
-  ratingKinopoisk: number;
-  year: number;
-}
+import { FilmInterface } from "../../types/types";
 
 export type FavoritesState = {
-  films: FavoritesFilmInterface[];
+  films: FilmInterface[];
   isFetching: boolean;
 };

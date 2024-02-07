@@ -1,39 +1,23 @@
 import { useParams } from "react-router-dom";
-import { createContext } from "react";
 
-import { DescriptionContextInterface, ParamsFilmType } from "../../types/types";
-import { FilmInfo } from "../../components/FilmInfo/FilmInfo";
+import { ParamsFilmType } from "../../types/types";
 import { useGetFilmInfoQuery } from "../../store/filmSlice/filmSlice";
+import { Poster } from "../../components/Poster";
+import { DescriptionFilm } from "../../components/DescriptionFilm";
 
-export const MyDescriptionFilmContext =
-  createContext<DescriptionContextInterface>({
-    ratingKinopoisk: 1,
-    year: 1,
-    nameRu: "",
-    description: "",
-    posterUrl: "",
-    id: "",
-  });
+import s from "./FilmPage.module.css";
 
 export const FilmPage = () => {
   const params = useParams<ParamsFilmType>();
   const id = params.id!;
   const { data } = useGetFilmInfoQuery(id);
 
-  const descriptionContext = {
-    ratingKinopoisk: data?.ratingKinopoisk,
-    year: data?.year,
-    nameRu: data?.nameRu,
-    description: data?.description,
-    posterUrl: data?.posterUrl,
-    id: id,
-  };
-
   return (
     data && (
-      <MyDescriptionFilmContext.Provider value={descriptionContext}>
-        <FilmInfo />
-      </MyDescriptionFilmContext.Provider>
+      <div className={s["film-wrapper"]}>
+        <Poster posterUrl={data.posterUrl} />
+        <DescriptionFilm film={data} />
+      </div>
     )
   );
 };

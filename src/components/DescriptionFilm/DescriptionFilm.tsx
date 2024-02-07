@@ -1,32 +1,24 @@
-import { useContext } from "react";
-import { getAuth } from "firebase/auth";
-import { auth } from "../../config/firebase-config";
 
+import { useMemo } from "react";
+
+import { useAppSelector } from "../../hooks";
 import { useFavorites } from "../../hooks/useFavorites";
-
-import { MyDescriptionFilmContext } from "../../pages/FilmPage";
+import { getUserSelector } from "../../store";
+import { FilmInterface } from "../../types/types";
 
 import s from "./DescriptionFilm.module.css";
 
-export const DescriptionFilm = () => {
-  const { description, nameRu, ratingKinopoisk, year, posterUrl, id } =
-    useContext(MyDescriptionFilmContext);
-  const isAuth = getAuth();
-  const userId = auth.currentUser?.uid;
-  const userEmail = isAuth.currentUser?.email;
+export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
+  const { nameRu, description, ratingKinopoisk, year } = film;
+
+  const user = useAppSelector(getUserSelector)!;
+  const userEmail = useMemo(() => user?.email, [user]);
 
   const { addToFavorites } = useFavorites(`${userEmail}`);
 
   const addToFavoritesHandler = () => {
-    if (userId) {
-      addToFavorites({
-        description: description,
-        nameRu: nameRu,
-        posterUrl: posterUrl,
-        ratingKinopoisk: ratingKinopoisk,
-        year: year,
-        id: id,
-      });
+    if (userEmail) {
+      addToFavorites(film);
     }
   };
 

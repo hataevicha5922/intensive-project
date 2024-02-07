@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { FilmInterface } from "../../types/types";
+import { FilmInterface, FilmInterfaceFromApi } from "../../types/types";
 import {
   FilmResponseInterface,
   DataInterface,
@@ -8,17 +8,15 @@ import {
 } from "../types";
 
 const convertFimlForUi = ({
+  id,
   description,
-  genres,
-  countries,
   posterUrl,
   ratingKinopoisk,
   year,
   nameRu,
-}: FilmInterface) => ({
+}: FilmResponseInterface): FilmInterface => ({
+  id,
   description,
-  genres,
-  countries,
   posterUrl,
   ratingKinopoisk,
   year,
@@ -56,7 +54,9 @@ export const filmSlice = createApi({
       query: (id: string) => ({
         url: `/api/v2.2/films/${id}`,
       }),
-      transformResponse: (response: FilmInterface): FilmResponseInterface => {
+      transformResponse: (
+        response: FilmInterfaceFromApi
+      ): FilmResponseInterface => {
         return convertFimlForUi(response);
       },
     }),

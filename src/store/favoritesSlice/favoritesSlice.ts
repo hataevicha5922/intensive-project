@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { FavoritesFilmInterface, FavoritesState } from "../types";
+import { FavoritesState } from "../types";
+import { FilmInterface } from "../../types/types";
 
 const initialState: FavoritesState = {
   films: [],
@@ -10,7 +11,7 @@ const favoritesSlice = createSlice({
   name: "favorites",
   initialState,
   reducers: {
-    setFavorites: (state, action: PayloadAction<FavoritesFilmInterface[]>) => {
+    setFavorites: (state, action: PayloadAction<FilmInterface[]>) => {
       state.films = action.payload;
       state.isFetching = true;
     },

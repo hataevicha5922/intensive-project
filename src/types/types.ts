@@ -23,6 +23,15 @@ export interface FilmsInterface {
 }
 
 export interface FilmInterface {
+  id: number;
+  posterUrl: string;
+  description: string;
+  nameRu: string;
+  ratingKinopoisk: number;
+  year: number;
+}
+
+export interface FilmInterfaceFromApi {
   kinopoiskId: number;
   kinopoiskHDId: string;
   imdbId: string;
@@ -74,15 +83,6 @@ export interface FilmInfoPropsInterface {
   genres: GenresType[];
   countries: CountriesType[];
   posterUrl: string;
-}
-
-export interface DescriptionContextInterface {
-  ratingKinopoisk: number | undefined;
-  year: number | undefined;
-  nameRu: string | undefined;
-  description: string | undefined;
-  posterUrl: string | undefined;
-  id: string | undefined;
 }
 
 export type UserCredentialsType = {

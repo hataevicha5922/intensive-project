@@ -3,7 +3,8 @@ import { collection, getDocs } from "firebase/firestore";
 
 import { auth, db } from "../config/firebase-config";
 import { UserContextInterface } from "./utils-types";
-import { FavoritesFilmInterface, setFavorites, store } from "../store";
+import { setFavorites, store } from "../store";
+import { FilmInterface } from "../types/types";
 
 export const getUser = () => {
   const userData = localStorage.getItem("user");
@@ -27,8 +28,8 @@ export const logOutUser = async () => {
 export const getFavoritesFilms = async (userEmail: string) => {
   const favRef = collection(db, `${userEmail}favorites`);
   const data = await getDocs(favRef);
-  const favoriteFilms: FavoritesFilmInterface[] = data.docs.map((doc) => ({
-    ...(doc.data() as FavoritesFilmInterface),
+  const favoriteFilms: FilmInterface[] = data.docs.map((doc) => ({
+    ...(doc.data() as FilmInterface),
   }));
 
   store.dispatch(setFavorites(favoriteFilms));

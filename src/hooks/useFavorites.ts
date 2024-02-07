@@ -1,9 +1,8 @@
 import { addDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import { FavoritesFilmInterface } from "../store";
 
 export const useFavorites = (key: string) => {
-  const addToFavorites = async (value: FavoritesFilmInterface) => {
+  const addToFavorites = async (value: FilmInterface) => {
     try {
       await addDoc(collection(db, `${key}favorites`), value);
     } catch (error) {
