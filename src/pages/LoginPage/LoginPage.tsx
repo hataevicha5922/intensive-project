@@ -15,8 +15,10 @@ import { addUser } from "../../store";
 import { logInUser } from "../../utils";
 
 import s from "./LoginPage.module.css";
+import { useState } from "react";
 
 export const LoginPage = () => {
+  const [errorLogIn, setErrorLogIn] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -30,13 +32,14 @@ export const LoginPage = () => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user!;
+        const userData = { email: user.email!, uid: user.uid! };
 
-        logInUser({ email: user.email!, uid: user.uid });
-        dispatch(addUser(user));
-
+        logInUser(userData);
+        dispatch(addUser(userData));
         navigate("/");
       })
       .catch((error) => {
+        setErrorLogIn(true);
         throw new Error(error);
       });
   });
@@ -68,6 +71,9 @@ export const LoginPage = () => {
             name="password"
           />
           <p className={s["error"]}>{errors.password?.message}</p>
+          {errorLogIn && (
+            <p className={s["error"]}>Invalid email or password</p>
+          )}
         </div>
         <Button appearence="big">LogIn</Button>
       </form>

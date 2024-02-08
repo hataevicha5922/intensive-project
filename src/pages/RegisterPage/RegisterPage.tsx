@@ -15,8 +15,10 @@ import { addUser } from "../../store/userSlice/userSlice";
 import { logInUser } from "../../utils";
 
 import s from "./RegisterPage.module.css";
+import { useState } from "react";
 
 export const RegisterPage = () => {
+  const [errorRegister, setErrorRegister] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -30,11 +32,14 @@ export const RegisterPage = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        logInUser({ email: user.email!, uid: user.uid! });
-        dispatch(addUser(user));
+        const userData = { email: user.email!, uid: user.uid! };
+
+        logInUser(userData);
+        dispatch(addUser(userData));
         navigate("/");
       })
       .catch((error) => {
+        setErrorRegister(true);
         throw new Error(error);
       });
   });
@@ -66,6 +71,9 @@ export const RegisterPage = () => {
             name="password"
           />
           <p className={s["error"]}>{errors.password?.message}</p>
+          {errorRegister && (
+            <p className={s["error"]}>Invalid email or password</p>
+          )}
         </div>
         <Button appearence="big">Registration</Button>
       </form>

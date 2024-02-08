@@ -9,7 +9,6 @@ import {
   RegisterPage,
   ErrorPage,
 } from "../../pages";
-import { useUserAuth } from "../../hooks";
 
 export const FilmsPage = lazy(() => import("../../pages/FilmsPage/FilmsPage"));
 export const HistoryPage = lazy(
@@ -78,8 +77,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const MainRouter = () => {
-  useUserAuth();
-
-  return <RouterProvider router={router} />;
-};
+export const MainRouter = () => <RouterProvider router={router} />;
