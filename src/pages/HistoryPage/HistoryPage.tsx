@@ -30,7 +30,7 @@ export default function HistoryPage() {
   }, []);
 
   return (
-    <>
+    <div className={s["wrapper"]}>
       <Headling>History</Headling>
       <div className={s["history-wrapper"]}>
         {historyFilms.map((film) => {
@@ -47,6 +47,6 @@ export default function HistoryPage() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

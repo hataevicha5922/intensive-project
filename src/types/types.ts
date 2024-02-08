@@ -106,3 +106,4 @@ export interface LocalInterface extends DataBaseInterface {
 export type ParamsFilmType = {
   id: string;
 };
+

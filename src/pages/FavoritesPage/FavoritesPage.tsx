@@ -1,4 +1,5 @@
 import { FilmCart } from "../../components/FilmCart";
+import Headling from "../../components/Headling/Headling";
 import { useAppSelector } from "../../hooks";
 import { getFavoriteFilmsSelector } from "../../store";
 
@@ -9,19 +10,22 @@ export default function FavoritesPage() {
 
   return (
     <div className={s["favorites-wrapper"]}>
-      {favoritesFilms.map((film) => {
-        return (
-          <FilmCart
-            key={film.id}
-            id={film.id}
-            image={film.posterUrl}
-            name={film.nameRu}
-            rating={film.ratingKinopoisk}
-            year={film.year}
-            title={film.nameRu}
-          />
-        );
-      })}
+      <Headling>Favorites</Headling>
+      <div className={s["favorites-films"]}>
+        {favoritesFilms.map((film) => {
+          return (
+            <FilmCart
+              key={film.id}
+              id={film.id}
+              image={film.posterUrl}
+              name={film.nameRu}
+              rating={film.ratingKinopoisk}
+              year={film.year}
+              title={film.nameRu}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
