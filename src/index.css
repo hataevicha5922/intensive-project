@@ -7,8 +7,12 @@
   --white-color: #ffffff;
   --separator-color: #d4d6e0;
   --email-color: #9ea1b1;
+  --dark-background-header: #343436;
+  --dark-background-cart:#6a6a6e;
+  --dark-background-main: #343436;
 }
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
 }
+

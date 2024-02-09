@@ -1,10 +1,17 @@
 .card {
   background: var(--white-color);
-  box-shadow: 18px 18px 36px 0px rgba(211, 209, 216, 0.25);
   border-radius: 19px;
   width: 320px;
   text-decoration: none;
   min-height: 250px;
+}
+.dark {
+  background-color: var(--dark-background-cart);
+  box-shadow: 18px 18px 36px 0px rgba(239, 237, 243, 0.25);
+}
+.light {
+  background-color: var(--white-color);
+  box-shadow: 18px 18px 36px 0px rgba(77, 75, 80, 0.25);
 }
 .card-head {
   position: relative;
@@ -52,7 +59,6 @@
 }
 .add-to-favorites {
   text-decoration: none;
- 
 }
 .add-to-favorites:hover {
   color: var(--primary-hover-color);

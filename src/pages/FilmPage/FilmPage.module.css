@@ -1,5 +1,8 @@
 .film-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
+  padding-right: 20px;
 }

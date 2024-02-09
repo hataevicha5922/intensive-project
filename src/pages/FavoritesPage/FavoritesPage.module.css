@@ -1,9 +1,15 @@
 .favorites-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 40px;
-    padding: 20px 0px;
-  }
-  
+  min-height: 100vh;
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
+  padding-top: 10px;
+}
+
+.favorites-films {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px 0px;
+}

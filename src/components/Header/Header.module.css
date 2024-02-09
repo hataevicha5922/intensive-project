@@ -6,7 +6,12 @@
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: white;
+}
+.light {
+  background-color: var(--white-color);
+}
+.dark {
+  background-color: var(--dark-background-header);
 }
 .header-wrapper {
   display: flex;

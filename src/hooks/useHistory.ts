@@ -1,4 +1,4 @@
-import { addDoc, getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, setDoc, doc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
 export interface HistoryFilmInterface {
@@ -12,7 +12,7 @@ export interface HistoryFilmInterface {
 export const useHistory = (key: string) => {
   const addToHistory = async (value: HistoryFilmInterface) => {
     try {
-      await addDoc(collection(db, `${key}history`), value);
+      await setDoc(doc(db, `${key}history`, String(value.id)), value);
     } catch (error) {
       console.error(`Error from Firebase ${error}`);
     }

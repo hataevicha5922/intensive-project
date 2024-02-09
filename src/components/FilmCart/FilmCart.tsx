@@ -7,6 +7,7 @@ import { useHistory } from "../../hooks/useHistory";
 import { FilmCardProps } from "./FilmCart.props";
 
 import s from "./FilmCart.module.css";
+import { useTheme } from "../../context/ThemeContext";
 
 export const FilmCart = ({
   name,
@@ -17,6 +18,7 @@ export const FilmCart = ({
   year,
 }: FilmCardProps) => {
   const auth = getAuth();
+  const { isDark } = useTheme();
   const user = auth.currentUser;
   const userId = auth.currentUser?.uid;
   const userEmail = auth.currentUser?.email;
@@ -46,7 +48,7 @@ export const FilmCart = ({
   );
 
   return (
-    <div className={s["card"]}>
+    <div className={`${s["card"]} ${isDark ? s["dark"] : s["light"]}`}>
       <div className={s["card-head"]} style={cardHeadStyles}>
         <div className={s["price"]}>{year}</div>
         <div className={s["rating"]}>
