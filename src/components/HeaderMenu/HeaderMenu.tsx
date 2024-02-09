@@ -15,6 +15,7 @@ export const HeaderMenu = () => {
       {MENU_LIST.map((item) => {
         return !item.isAuth || (item.isAuth && user?.email) ? (
           <NavLink
+            key={item.id}
             className={({ isActive }) =>
               cn(s["menu-link"], {
                 [s.active]: isActive,
