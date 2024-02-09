@@ -22,7 +22,7 @@
  - [x] Пишем функциональные компоненты с хуками: [components](https://github.com/hataevicha5922/intensive-project/tree/main/src/components),[pages](https://github.com/hataevicha5922/intensive-project/tree/main/src/pages).
  - [x] Есть разделение на [умые](https://github.com/hataevicha5922/intensive-project/tree/main/src/components/FilmSearchResults) и [глупые](https://github.com/hataevicha5922/intensive-project/tree/main/src/components/Poster) компоненты.
  - [x] Есть рендеринг [списков](https://github.com/hataevicha5922/intensive-project/tree/main/src/pages/FilmsPage/FilmList)
- - [x] Реализована фотябы одна [форма](https://github.com/hataevicha5922/intensive-project/blob/main/src/pages/RegisterPage/RegisterPage.tsx)
+ - [x] Реализована [форма](https://github.com/hataevicha5922/intensive-project/blob/main/src/pages/RegisterPage/RegisterPage.tsx)
  - [x] Есть применение [ConextAPI](https://github.com/hataevicha5922/intensive-project/blob/main/src/context/ThemeContext.tsx)
  - [x] Есть применение [предохранителя](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx)
  - [x] Кастомный [хук](https://github.com/hataevicha5922/intensive-project/tree/main/src/hooks)
