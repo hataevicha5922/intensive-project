@@ -1,7 +1,8 @@
 import { FC } from "react";
-import s from "./Button.module.css";
 import cn from "classnames";
 import { ButtonProps } from "./Button.props";
+
+import s from "./Button.module.css";
 
 export const Button: FC<ButtonProps> = ({
   children,
@@ -21,4 +22,3 @@ export const Button: FC<ButtonProps> = ({
     </button>
   );
 };
-// export default Button;

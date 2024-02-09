@@ -1,21 +1,21 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store/userSlice/userSlice";
+import { logInUser } from "../../utils";
 
 import { UserCredentialsType } from "../../types/types";
 import { Button } from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
-import { useAppDispatch } from "../../hooks/hook";
-import { addUser } from "../../store/userSlice/userSlice";
-import { logInUser } from "../../utils";
 
 import s from "./RegisterPage.module.css";
-import { useState } from "react";
 
 export const RegisterPage = () => {
   const [errorRegister, setErrorRegister] = useState(false);

@@ -16,7 +16,6 @@ const favoritesSlice = createSlice({
       state.isFetching = true;
     },
     resetFavorites: (state) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       state.films = [];
       state.isFetching = false;
     },

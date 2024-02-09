@@ -19,7 +19,7 @@ export const Header = () => {
       <div className={s["header-wrapper"]}>
         <Logo />
         <ThemeIcon />
-        {user && <HeaderMenu />}
+        <HeaderMenu />
         <div className={s["info"]}>
           {user ? <ProfileGroup /> : <RegistrationGroup />}
         </div>
