@@ -1,6 +1,5 @@
 import { signOut } from "firebase/auth";
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
