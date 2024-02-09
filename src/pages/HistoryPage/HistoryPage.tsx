@@ -33,6 +33,7 @@ export default function HistoryPage() {
     <div className={s["wrapper"]}>
       <Headling>History</Headling>
       <div className={s["history-wrapper"]}>
+      {historyFilms.length === 0 && <h2>History is empty</h2>}
         {historyFilms.map((film) => {
           return (
             <FilmCart

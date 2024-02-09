@@ -12,6 +12,7 @@ export default function FavoritesPage() {
     <div className={s["favorites-wrapper"]}>
       <Headling>Favorites</Headling>
       <div className={s["favorites-films"]}>
+        {favoritesFilms.length === 0 && <h2>Favorites list is empty</h2>}
         {favoritesFilms.map((film) => {
           return (
             <FilmCart

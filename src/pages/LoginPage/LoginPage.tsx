@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { auth } from "../../config/firebase-config";
+import { useAppDispatch } from "../../hooks/hook";
+import { addUser } from "../../store";
+import { logInUser } from "../../utils";
 import { UserCredentialsType } from "../../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
@@ -10,12 +14,8 @@ import { Button } from "../../components/Button/Button";
 import Headling from "../../components/Headling/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
-import { useAppDispatch } from "../../hooks/hook";
-import { addUser } from "../../store";
-import { logInUser } from "../../utils";
 
 import s from "./LoginPage.module.css";
-import { useState } from "react";
 
 export const LoginPage = () => {
   const [errorLogIn, setErrorLogIn] = useState(false);

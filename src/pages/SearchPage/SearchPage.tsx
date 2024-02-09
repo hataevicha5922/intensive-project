@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from "react";
+
+import { useDebounce } from "../../hooks/useDebounce";
 import { FilmSearchResults } from "../../components/FilmSearchResults";
 import Headling from "../../components/Headling/Headling";
 
 import s from "./SearchPage.module.css";
-import { useDebounce } from "../../hooks/useDebounce";
 
 export const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState("");

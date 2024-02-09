@@ -1,6 +1,7 @@
-import s from "./Headling.module.css";
 import cn from "classnames";
 import { HeadlingProps } from "./Headling.props";
+
+import s from "./Headling.module.css";
 
 const Headling = ({ children, className, ...props }: HeadlingProps) => {
   return (

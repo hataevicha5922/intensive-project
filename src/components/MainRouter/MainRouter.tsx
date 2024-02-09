@@ -21,7 +21,7 @@ export const FavoritesPage = lazy(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout />,
+    element: <MainLayout isAuth={false} />,
     children: [
       {
         path: "/",
@@ -35,6 +35,12 @@ const router = createBrowserRouter([
         path: "/search",
         element: <SearchPage />,
       },
+    ],
+  },
+  {
+    path: "/",
+    element: <MainLayout isAuth={true} />,
+    children: [
       {
         path: "/history",
         element: (

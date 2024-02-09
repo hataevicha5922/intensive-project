@@ -3,11 +3,11 @@ import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "../../hooks/useHistory";
+import { useTheme } from "../../context/ThemeContext";
 
 import { FilmCardProps } from "./FilmCart.props";
 
 import s from "./FilmCart.module.css";
-import { useTheme } from "../../context/ThemeContext";
 
 export const FilmCart = ({
   name,
