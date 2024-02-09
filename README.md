@@ -26,6 +26,7 @@
  - [x] Есть применение [ConextAPI](https://github.com/hataevicha5922/intensive-project/blob/main/src/context/ThemeContext.tsx)
  - [x] Есть применение [предохранителя](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx)
  - [x] Кастомный [хук](https://github.com/hataevicha5922/intensive-project/tree/main/src/hooks)
+ - [x] Использование [PropTypes](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/FilmSearchResults/FilmSearchResults.tsx)
  - [x] Поиск не должен триггерить много запросов [debounce](https://github.com/hataevicha5922/intensive-project/blob/main/src/hooks/useDebounce.ts)
  - [x] Есть применение [Lazy+Suspense](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/MainRouter/MainRouter.tsx)
 >
@@ -39,6 +40,6 @@
 >
 > ## 2 уровень
 >
- - [x] Использование **TypeScripte
+ - [x] Использование [TypeScripte](https://github.com/hataevicha5922/intensive-project)
  - [x] Использование [Firebase](https://github.com/hataevicha5922/intensive-project/blob/main/src/config/firebase-config.ts)
  - [x] Использование [createSelector](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/favoritesSlice/selectors.ts)
