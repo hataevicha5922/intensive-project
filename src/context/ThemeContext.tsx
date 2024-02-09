@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { ThemeContextInterface, ThemeProviderProps } from "./ThemeTypes";
 
 const ThemeContext = createContext<ThemeContextInterface | undefined>(
@@ -22,9 +22,9 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     setIsDark((prev) => !prev);
   };
 
+  const value = useMemo(() => ({ isDark, toggleTheme }), [isDark]);
+
   return (
-    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
