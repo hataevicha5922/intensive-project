@@ -71,3 +71,21 @@
   align-items: center;
   justify-content: space-between;
 }
+.button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 10px 10px;
+}
+.favorites-button {
+  max-height: 50px;
+  min-width: 170px;
+  border: none;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.favorites-button:hover {
+  background-color: var(--primary-hover-color);
+}
