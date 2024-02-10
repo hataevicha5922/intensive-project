@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
-import { auth } from "../../config/firebase-config";
+import { auth } from "../../config";
 import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
 import { logInUser } from "../../utils";

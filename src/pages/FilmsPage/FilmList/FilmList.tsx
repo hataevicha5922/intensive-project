@@ -19,7 +19,6 @@ export const FilmList = ({ data }: FilmListPropsType) => {
             key={item.kinopoiskId}
             id={item.kinopoiskId}
             title={item.nameOriginal || item.nameRu}
-            // description={item.type}
             name={item.nameRu}
             rating={item.ratingImdb || item.ratingKinopoisk}
             image={item.posterUrlPreview}

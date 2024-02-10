@@ -1,39 +1,28 @@
 import { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { getDocs, collection } from "firebase/firestore";
 
-import { db } from "../../config/firebase-config";
+import { auth } from "../../config";
 
 import Headling from "../../components/Headling/Headling";
 import { FilmCart } from "../../components/FilmCart";
-import { LocalInterface, DataBaseInterface } from "../../types/types";
+import { LocalInterface } from "../../types/types";
 
 import s from "./History.module.css";
+import { getHistoryFilms } from "../../utils";
 
 export default function HistoryPage() {
   const [historyFilms, setHistoryfilms] = useState<LocalInterface[]>([]);
-  const isAuth = getAuth();
-  const userEmail = isAuth.currentUser?.email;
+  const user = auth.currentUser;
+  const userEmail = user?.email;
 
   useEffect(() => {
-    const filmsRef = collection(db, `${userEmail}history`);
-    const getHistoryFilms = async () => {
-      const data = await getDocs(filmsRef);
-      setHistoryfilms(
-        data.docs.map((doc) => ({
-          ...(doc.data() as DataBaseInterface),
-          filmId: doc.id,
-        }))
-      );
-    };
-    getHistoryFilms();
+    getHistoryFilms(userEmail!).then((films) => setHistoryfilms(films));
   }, []);
 
   return (
     <div className={s["wrapper"]}>
       <Headling>History</Headling>
       <div className={s["history-wrapper"]}>
-      {historyFilms.length === 0 && <h2>History is empty</h2>}
+        {historyFilms.length === 0 && <h2>History is empty</h2>}
         {historyFilms.map((film) => {
           return (
             <FilmCart

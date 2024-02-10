@@ -1,9 +1,9 @@
 import { useMemo } from "react";
-import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 import { useHistory } from "../../hooks/useHistory";
 import { useTheme } from "../../context/ThemeContext";
+import { auth } from "../../config";
 
 import { FilmCardProps } from "./FilmCart.props";
 
@@ -17,11 +17,10 @@ export const FilmCart = ({
   title,
   year,
 }: FilmCardProps) => {
-  const auth = getAuth();
   const { isDark } = useTheme();
   const user = auth.currentUser;
-  const userId = auth.currentUser?.uid;
-  const userEmail = auth.currentUser?.email;
+  const userId = user?.uid;
+  const userEmail = user?.email;
 
   const { addToHistory } = useHistory(`${userEmail}`);
 
@@ -62,19 +61,13 @@ export const FilmCart = ({
       <div className={s["card-footer"]}>
         <div className={s["title"]}>{title}</div>
         <div>
-          {user ? (
-            <Link
-              to={`/film/${id}`}
-              className={s["add-to-favorites"]}
-              onClick={addToHistoryHandler}
-            >
-              More
-            </Link>
-          ) : (
-            <Link to={`/auth/login`} className={s["add-to-favorites"]}>
-              More
-            </Link>
-          )}
+          <Link
+            to={`/film/${id}`}
+            className={s["add-to-favorites"]}
+            onClick={addToHistoryHandler}
+          >
+            More
+          </Link>
         </div>
       </div>
     </div>

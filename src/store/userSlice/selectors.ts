@@ -12,3 +12,10 @@ export const getUserSelector = createSelector(
   getUserDataSelector,
   (userData) => userData.user
 );
+
+const getSearchResultSelector = (state: RootState) => state.search.queries;
+
+export const getSearchResultFilms = createSelector(
+  getSearchResultSelector,
+  (searchData) => searchData.data
+);

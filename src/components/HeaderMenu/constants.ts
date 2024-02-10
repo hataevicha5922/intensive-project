@@ -1,11 +1,5 @@
 export const MENU_LIST = [
   {
-    title: "Search",
-    route: "/search",
-    isAuth: false,
-    id: 1,
-  },
-  {
     title: "History",
     route: "/history",
     isAuth: true,
