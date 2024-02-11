@@ -12,9 +12,9 @@ import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
 import { logInUser, logInUserInDB } from "../../utils";
 import { schema } from "../../config/yup-schema";
+import { UserCredential } from "firebase/auth";
 
 import s from "./LoginPage.module.css";
-import { UserCredential } from "firebase/auth";
 
 export const LoginPage = () => {
   const [errorLogIn, setErrorLogIn] = useState(false);

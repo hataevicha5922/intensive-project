@@ -4,9 +4,9 @@ import { useAppSelector } from "../../hooks";
 import { getFavoriteFilmsSelector, getUserSelector } from "../../store";
 import { FilmInterface } from "../../types/types";
 import { addToFavorites, removeToFavorites } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 import s from "./DescriptionFilm.module.css";
-import { useNavigate } from "react-router-dom";
 
 export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
   const { nameRu, description, ratingKinopoisk, year, id } = film;
