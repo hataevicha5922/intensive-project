@@ -8,7 +8,6 @@ import { MENU_LIST } from "./constants";
 import { SearchInput } from "../SearchInput";
 
 import s from "./HeaderMenu.module.css";
-import { Fragment } from "react";
 
 export const HeaderMenu = () => {
   const user = useAppSelector(getUserSelector)!;
@@ -19,7 +18,7 @@ export const HeaderMenu = () => {
       {MENU_LIST.map((item) => {
         return !item.isAuth || (item.isAuth && user?.email) ? (
           <NavLink
-          key={item.route}
+            key={item.route}
             className={({ isActive }) =>
               cn(s["menu-link"], {
                 [s.active]: isActive,
