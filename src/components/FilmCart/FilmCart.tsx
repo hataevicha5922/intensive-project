@@ -2,10 +2,9 @@ import { useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useTheme } from "../../context/ThemeContext";
-import { auth } from "../../config";
 import { addToFavorites, removeToFavorites } from "../../utils";
 import { useAppSelector } from "../../hooks";
-import { getFavoriteFilmsSelector } from "../../store";
+import { getFavoriteFilmsSelector, getUserSelector } from "../../store";
 
 import { FilmCardProps } from "./FilmCart.props";
 
@@ -19,9 +18,8 @@ export const FilmCart = ({
   title,
   year,
 }: FilmCardProps) => {
+  const user = useAppSelector(getUserSelector)!;
   const { isDark } = useTheme();
-  const user = auth.currentUser;
-  const userEmail = user?.email;
   const favoritesFilms = useAppSelector(getFavoriteFilmsSelector);
   const navigate = useNavigate();
 
@@ -40,7 +38,7 @@ export const FilmCart = ({
     [favoritesFilms, id]
   );
   const addToFavoritesHandler = () => {
-    if (userEmail) {
+    if (user?.email) {
       addToFavorites(
         {
           nameRu: name,
@@ -50,14 +48,14 @@ export const FilmCart = ({
           id: id,
           description: name,
         },
-        userEmail
+        user.email
       );
     }
   };
 
   const removeFromFavoritesHandler = () => {
-    if (userEmail) {
-      removeToFavorites(id, userEmail);
+    if (user?.email) {
+      removeToFavorites(id, user.email);
     }
   };
 
@@ -92,7 +90,7 @@ export const FilmCart = ({
             <button
               className={s["favorites-button"]}
               onClick={
-                userEmail
+                user?.email
                   ? addToFavoritesHandler
                   : () => navigate("/auth/login")
               }

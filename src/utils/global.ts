@@ -1,4 +1,9 @@
-import { signOut } from "firebase/auth";
+import {
+  UserCredential,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import {
   collection,
   deleteDoc,
@@ -32,7 +37,6 @@ export const logOutUser = async () => {
 };
 
 export const getFavoritesFilms = async (userEmail: string) => {
-
   const favRef = collection(db, `${userEmail}favorites`);
   const data = await getDocs(favRef);
   const favoriteFilms: FilmInterface[] = data.docs.map((doc) => ({
@@ -61,4 +65,52 @@ export const removeToFavorites = async (id: number, userEmail: string) => {
   } catch (error) {
     console.error(`Error from Firebase ${error}`);
   }
+};
+
+export const addToHistory = async (searchText: string, userEmail: string) => {
+  try {
+    await setDoc(doc(db, `${userEmail}history`, searchText), { searchText });
+  } catch (error) {
+    console.error(`Error from Firebase ${error}`);
+  }
+};
+
+export const getHistory = async (userEmail: string) => {
+  try {
+    const docSnap = await getDocs(collection(db, `${userEmail}history`));
+
+    return docSnap.docs.map((doc) => ({
+      ...(doc.data() as { searchText: string }),
+    }));
+  } catch (error) {
+    console.error("Error from firebase", error);
+  }
+};
+
+export const logInUserInDB = ({
+  data,
+  successHandler,
+  errorHandler,
+}: {
+  data: { email: string; password: string };
+  successHandler: (data: UserCredential) => void;
+  errorHandler: (data: string) => void;
+}) => {
+  signInWithEmailAndPassword(auth, data.email, data.password)
+    .then(successHandler)
+    .catch(errorHandler);
+};
+
+export const regInUserInDB = ({
+  data,
+  successHandler,
+  errorHandler,
+}: {
+  data: { email: string; password: string };
+  successHandler: (data: UserCredential) => void;
+  errorHandler: (data: string) => void;
+}) => {
+  createUserWithEmailAndPassword(auth, data.email, data.password)
+    .then(successHandler)
+    .catch(errorHandler);
 };

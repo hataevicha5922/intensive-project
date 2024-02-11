@@ -3,15 +3,15 @@ import { RegistrationGroup } from "../RegistartionGroup";
 import { ProfileGroup } from "../ProfileGroup";
 import { HeaderMenu } from "../HeaderMenu";
 import { useAppSelector } from "../../hooks";
-import { getUserSelector } from "../../store";
+import { getAuthorizeCheckedSelector, getUserSelector } from "../../store";
 import { useTheme } from "../../context/ThemeContext";
 import { ThemeIcon } from "../ThemeIcon/ThemeIcon";
 
 import s from "./Header.module.css";
 
-
 export const Header = () => {
   const user = useAppSelector(getUserSelector)!;
+  const authorizeChecked = useAppSelector(getAuthorizeCheckedSelector);
   const { isDark } = useTheme();
 
   return (
@@ -21,7 +21,9 @@ export const Header = () => {
         <ThemeIcon />
         <HeaderMenu />
         <div className={s["info"]}>
-          {user ? <ProfileGroup /> : <RegistrationGroup />}
+          {authorizeChecked && (
+            <>{user ? <ProfileGroup /> : <RegistrationGroup />}</>
+          )}
         </div>
       </div>
     </div>

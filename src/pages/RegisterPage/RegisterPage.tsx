@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase-config";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
 import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store/userSlice/userSlice";
-import { logInUser } from "../../utils";
+import { logInUser, regInUserInDB } from "../../utils";
 
 import { UserCredentialsType } from "../../types/types";
 import { Button } from "../../components/Button";
@@ -29,19 +27,21 @@ export const RegisterPage = () => {
   } = useForm<UserCredentialsType>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
+    regInUserInDB({
+      data,
+      successHandler: (userCredential) => {
         const user = userCredential.user;
         const userData = { email: user.email!, uid: user.uid! };
 
         logInUser(userData);
         dispatch(addUser(userData));
         navigate("/");
-      })
-      .catch((error) => {
+      },
+      errorHandler: (error) => {
         setErrorRegister(true);
         throw new Error(error);
-      });
+      },
+    });
   });
 
   return (

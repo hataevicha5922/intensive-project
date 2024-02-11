@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { auth } from "../../config/firebase-config";
 import { UserState } from "../types";
 
 export const initialState: UserState = {
-  authorize: !!auth,
+  authorizeChecked: false,
   user: null,
 };
 
@@ -14,11 +13,14 @@ const userSlice = createSlice({
     addUser: (state, action) => {
       state.user = action.payload;
     },
+    authorizeChecked: (state) => {
+      state.authorizeChecked = true;
+    },
     logOut: (state) => {
       state.user = null;
     },
   },
 });
- 
+
 export const userReducer = userSlice.reducer;
-export const { addUser, logOut } = userSlice.actions;
+export const { addUser, logOut, authorizeChecked } = userSlice.actions;

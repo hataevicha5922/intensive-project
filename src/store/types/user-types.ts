@@ -1,9 +1,9 @@
 interface UserInterface {
-    email: string;
-    uid: string;
-  }
-  
-  export type UserState = {
-    authorize: boolean;
-    user: UserInterface | null;
-  };
+  email: string;
+  uid: string;
+}
+
+export type UserState = {
+  authorizeChecked: boolean;
+  user: UserInterface | null;
+};

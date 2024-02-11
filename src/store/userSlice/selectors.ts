@@ -3,9 +3,9 @@ import { RootState } from "../store";
 
 const getUserDataSelector = (state: RootState) => state.userData;
 
-export const getAuthorizeSelector = createSelector(
+export const getAuthorizeCheckedSelector = createSelector(
   getUserDataSelector,
-  (userData) => userData.authorize
+  (userData) => userData.authorizeChecked
 );
 
 export const getUserSelector = createSelector(

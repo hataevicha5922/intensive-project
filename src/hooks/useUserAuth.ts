@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { addUser } from "../store";
+import { addUser, authorizeChecked } from "../store";
 import { getUser } from "../utils";
 import { useAppDispatch } from ".";
 
@@ -10,5 +10,6 @@ export const useUserAuth = () => {
     if (user) {
       dispatch(addUser(user));
     }
+    dispatch(authorizeChecked());
   }, []);
 };

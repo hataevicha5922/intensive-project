@@ -1,41 +1,42 @@
 import { useEffect, useState } from "react";
-
-import { auth } from "../../config";
+import { useNavigate } from "react-router-dom";
 
 import { Headling } from "../../components/Headling";
-import { FilmCart } from "../../components/FilmCart";
-import { LocalInterface } from "../../types/types";
-import { getHistoryFilms } from "../../utils";
+import { getHistory } from "../../utils";
+import { useAppSelector } from "../../hooks";
+import { getUserSelector } from "../../store";
 
 import s from "./History.module.css";
 
 export default function HistoryPage() {
-  const [historyFilms, setHistoryfilms] = useState<LocalInterface[]>([]);
-  const user = auth.currentUser;
-  const userEmail = user?.email;
+  const navigate = useNavigate();
+  const user = useAppSelector(getUserSelector)!;
+  const [history, setHistory] = useState<{ searchText: string }[]>([]);
 
   useEffect(() => {
-    getHistoryFilms(userEmail!).then((films) => setHistoryfilms(films));
-  }, []);
+    if (user?.email) {
+      getHistory(user.email).then((data) => setHistory(data || []));
+    }
+  }, [user?.email]);
+
+  const onClickHandler = (searchText: string) =>
+    navigate(`/search?searchText=${searchText}`);
 
   return (
     <div className={s["wrapper"]}>
       <Headling>History</Headling>
       <div className={s["history-wrapper"]}>
-        {historyFilms.length === 0 && <h2>History is empty</h2>}
-        {historyFilms.map((film) => {
-          return (
-            <FilmCart
-              key={film.filmId}
-              id={film.id}
-              image={film.posterUrl}
-              name={film.nameRu}
-              rating={film.ratingKinopoisk}
-              year={film.year}
-              title={film.nameRu}
-            />
-          );
-        })}
+        {Boolean(history?.length < 1) && <h2>History is empty</h2>}
+        {user?.email &&
+          history.map((item) => (
+            <div
+              onClick={() => onClickHandler(item.searchText)}
+              className={s["history-item"]}
+              key={item.searchText}
+            >
+              {item.searchText}
+            </div>
+          ))}
       </div>
     </div>
   );

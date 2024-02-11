@@ -5,10 +5,13 @@
 }
 
 .history-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
   padding: 20px 0px;
+}
+
+.history-item {
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }

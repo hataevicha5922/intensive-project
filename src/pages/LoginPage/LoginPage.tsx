@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { UserCredentialsType } from "../../types/types";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,13 +8,13 @@ import { Button } from "../../components/Button/Button";
 import { Headling } from "../../components/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
-import { auth } from "../../config";
 import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
-import { logInUser } from "../../utils";
+import { logInUser, logInUserInDB } from "../../utils";
 import { schema } from "../../config/yup-schema";
 
 import s from "./LoginPage.module.css";
+import { UserCredential } from "firebase/auth";
 
 export const LoginPage = () => {
   const [errorLogIn, setErrorLogIn] = useState(false);
@@ -29,19 +28,21 @@ export const LoginPage = () => {
   } = useForm<UserCredentialsType>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
+    logInUserInDB({
+      data,
+      successHandler: (userCredential: UserCredential) => {
         const user = userCredential.user!;
         const userData = { email: user.email!, uid: user.uid! };
 
         logInUser(userData);
         dispatch(addUser(userData));
         navigate("/");
-      })
-      .catch((error) => {
+      },
+      errorHandler: (error: string) => {
         setErrorLogIn(true);
         throw new Error(error);
-      });
+      },
+    });
   });
 
   return (
