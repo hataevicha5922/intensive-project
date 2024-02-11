@@ -9,6 +9,7 @@ import {
   RegisterPage,
   ErrorPage,
 } from "../../pages";
+import { PrivateRoute } from "../PrivateRoute";
 
 export const FilmsPage = lazy(() => import("../../pages/FilmsPage/FilmsPage"));
 export const HistoryPage = lazy(
@@ -21,7 +22,7 @@ export const FavoritesPage = lazy(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout isAuth={false} />,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
@@ -39,26 +40,24 @@ const router = createBrowserRouter([
         path: "/film/:id",
         element: <FilmPage />,
       },
-    ],
-  },
-  {
-    path: "/",
-    element: <MainLayout isAuth={true} />,
-    children: [
       {
         path: "/history",
         element: (
-          <Suspense fallback={"Loading"}>
-            <HistoryPage />
-          </Suspense>
+          <PrivateRoute>
+            <Suspense fallback={"Loading"}>
+              <HistoryPage />
+            </Suspense>
+          </PrivateRoute>
         ),
       },
       {
         path: "favorites",
         element: (
-          <Suspense fallback={"Loading..."}>
-            <FavoritesPage />
-          </Suspense>
+          <PrivateRoute>
+            <Suspense fallback={"Loading..."}>
+              <FavoritesPage />
+            </Suspense>
+          </PrivateRoute>
         ),
       },
     ],
