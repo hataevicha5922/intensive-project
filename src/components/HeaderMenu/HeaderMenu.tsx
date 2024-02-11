@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import cn from "classnames";
 
@@ -18,7 +19,7 @@ export const HeaderMenu = () => {
       {MENU_LIST.map((item) => {
         return !item.isAuth || (item.isAuth && user?.email) ? (
           <NavLink
-            key={item.id}
+          key={item.route}
             className={({ isActive }) =>
               cn(s["menu-link"], {
                 [s.active]: isActive,
@@ -29,7 +30,7 @@ export const HeaderMenu = () => {
             {item.title}
           </NavLink>
         ) : (
-          <Fragment key={item.id}></Fragment>
+          <Fragment key={item.route}></Fragment>
         );
       })}
     </div>

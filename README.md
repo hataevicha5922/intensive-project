@@ -1,30 +1,45 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Intensive-project
+-------------------------------------------------------------------------------------------------------------------
+> - Предметная область: приложение поиска фильмов.
+> - Используемое API: [KinopoiskAPI](https://kinopoiskapiunofficial.tech/documentation/api/)
+>
+>
+## Основной функционал 
+>
+> - Регистрация и авторизация пользователя.
+> - Избранные фильмы. У зарегестрированного пользователя есть возможность добавлять и удалять фильмы в избранное.
+> - Поиск по названию фильма.
+> - История просмотренных фильмов.
+> - Зарегестрированный пользователь может просмотреть полную информацию про фильм.
+>
+> ## Реализация требований
+>
+ - [x] Реализованы требования функционала.
+ - [x] Для хранения данных используется LocalStorage [logInUser](https://github.com/hataevicha5922/intensive-project/blob/main/src/utils/global.ts)
+>
+> ### React
+>
+ - [x] Пишем функциональные компоненты с хуками: [components](https://github.com/hataevicha5922/intensive-project/tree/main/src/components),[pages](https://github.com/hataevicha5922/intensive-project/tree/main/src/pages).
+ - [x] Есть разделение на [умые](https://github.com/hataevicha5922/intensive-project/tree/main/src/components/FilmSearchResults) и [глупые](https://github.com/hataevicha5922/intensive-project/tree/main/src/components/Poster) компоненты.
+ - [x] Есть рендеринг [списков](https://github.com/hataevicha5922/intensive-project/tree/main/src/pages/FilmsPage/FilmList)
+ - [x] Реализована [форма](https://github.com/hataevicha5922/intensive-project/blob/main/src/pages/RegisterPage/RegisterPage.tsx)
+ - [x] Есть применение [ConextAPI](https://github.com/hataevicha5922/intensive-project/blob/main/src/context/ThemeContext.tsx)
+ - [x] Есть применение [предохранителя](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx)
+ - [x] Кастомный [хук](https://github.com/hataevicha5922/intensive-project/tree/main/src/hooks)
+ - [x] Использование [PropTypes](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/FilmSearchResults/FilmSearchResults.tsx)
+ - [x] Поиск не должен триггерить много запросов [debounce](https://github.com/hataevicha5922/intensive-project/blob/main/src/hooks/useDebounce.ts)
+ - [x] Есть применение [Lazy+Suspense](https://github.com/hataevicha5922/intensive-project/blob/main/src/components/MainRouter/MainRouter.tsx)
+>
+> ### Redux
+>
+ - [x] Используем [Modern Redux with Redux Toolkit](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/store.ts)
+ - [x] Используем [слайсы](https://github.com/hataevicha5922/intensive-project/tree/main/src/store/userSlice)
+ - [x] Кастомная [middleware](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/middleware/logger.ts)
+ - [x] Используем [RTK Query](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/filmSlice/filmSlice.ts)
+ - [x] Используем [Transforming Responses](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/filmSlice/filmSlice.ts)
+>
+> ## 2 уровень
+>
+ - [x] Использование [TypeScripte](https://github.com/hataevicha5922/intensive-project)
+ - [x] Использование [Firebase](https://github.com/hataevicha5922/intensive-project/blob/main/src/config/firebase-config.ts)
+ - [x] Использование [createSelector](https://github.com/hataevicha5922/intensive-project/blob/main/src/store/favoritesSlice/selectors.ts)
