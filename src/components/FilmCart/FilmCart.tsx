@@ -83,7 +83,7 @@ export const FilmCart = ({
           </Link>
           {isFavorite ? (
             <button
-              className={s["favorites-button"]}
+              className={s["favorites-button-remove"]}
               onClick={removeFromFavoritesHandler}
             >
               remove from Favorites

@@ -89,3 +89,17 @@
 .favorites-button:hover {
   background-color: var(--primary-hover-color);
 }
+.favorites-button-remove {
+  max-height: 50px;
+  min-width: 170px;
+  border: none;
+  background-color: var(--primary-color-remove);
+  color: var(--white-color);
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.favorites-button-remove:hover {
+  background-color: var(--primary-hover-color-remove);
+}

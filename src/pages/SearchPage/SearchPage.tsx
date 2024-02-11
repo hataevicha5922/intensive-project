@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 import { useDebounce } from "../../hooks/useDebounce";
 
@@ -15,7 +15,6 @@ export const SearchPage = () => {
     <div className={s["search"]}>
       <div className={s["search-header"]}>
         <Headling>Search</Headling>
-     
       </div>
       <FilmSearchResults searchTerm={debouncedSearchTerm} />
     </div>

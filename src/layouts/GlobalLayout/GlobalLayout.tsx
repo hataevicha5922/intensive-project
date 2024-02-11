@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { MainRouter } from "../../components/MainRouter";
-import { useAppSelector, useUserAuth } from "../../hooks";
+import { useAppDispatch, useAppSelector, useUserAuth } from "../../hooks";
 import {
   getFavoriteFilmsIsFetchingSelector,
   getUserSelector,
   resetFavorites,
-  store,
 } from "../../store";
 import { getFavoritesFilms } from "../../utils";
 
 export const GlobalLayout = () => {
+  const dispatch = useAppDispatch();
   useUserAuth();
   const user = useAppSelector(getUserSelector)!;
   const isFetching = useAppSelector(getFavoriteFilmsIsFetchingSelector);
@@ -18,7 +18,7 @@ export const GlobalLayout = () => {
     if (user?.email && !isFetching) {
       getFavoritesFilms(user.email);
     } else if (!user?.email && isFetching) {
-      store.dispatch(resetFavorites());
+      dispatch(resetFavorites());
     }
   }, [user?.email, isFetching]);
 

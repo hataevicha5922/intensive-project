@@ -1,14 +1,16 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react";
 
+import { useAppDispatch } from "../../hooks";
+import { setSearchWord } from "../../store/searchWordSlice/searchWordSlice";
+
 import s from "./SearchInput.module.css";
-import { useLazySearchFilmQuery } from "../../store";
 import { useNavigate } from "react-router-dom";
 
 export const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchFilms] = useLazySearchFilmQuery();
+
   const navigate = useNavigate();
-  //   const debouncedSearchTerm = useDebounce(searchTerm, 5000);
+  const dispatch = useAppDispatch();
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -16,13 +18,13 @@ export const SearchInput = () => {
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     if (e.code === "Enter") {
-      searchFilms(searchTerm);
+      dispatch(setSearchWord(searchTerm));
       navigate("/search");
     }
   };
 
-  const onClickHandler = () => {
-    searchFilms(searchTerm);
+  const onClickHandler = async () => {
+    dispatch(setSearchWord(searchTerm));
     navigate("/search");
   };
 

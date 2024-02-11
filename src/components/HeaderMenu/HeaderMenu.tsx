@@ -7,14 +7,14 @@ import { MENU_LIST } from "./constants";
 import { SearchInput } from "../SearchInput";
 
 import s from "./HeaderMenu.module.css";
-
+import { Fragment } from "react";
 
 export const HeaderMenu = () => {
   const user = useAppSelector(getUserSelector)!;
 
   return (
     <div className={s["menu"]}>
-      <SearchInput/>
+      <SearchInput />
       {MENU_LIST.map((item) => {
         return !item.isAuth || (item.isAuth && user?.email) ? (
           <NavLink
@@ -29,7 +29,7 @@ export const HeaderMenu = () => {
             {item.title}
           </NavLink>
         ) : (
-          <></>
+          <Fragment key={item.id}></Fragment>
         );
       })}
     </div>

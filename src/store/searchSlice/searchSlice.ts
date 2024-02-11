@@ -1,20 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { FilmInterface, FilmInterfaceFromApi } from "../../types/types";
 
-import {
-  //   FilmResponseInterface,
-  //   DataInterface,
-  SearchResultInterface,
-  TransformedSearchFilmsResultInterface,
-} from "../types";
-
-const convertSearchFilmResponse = ({
-  films,
-  keyword,
-}: SearchResultInterface) => ({
-  keyword,
-  films: films,
-});
+import { SearchFilmInterface, SearchResultInterface } from "../types";
 
 export const searchSlice = createApi({
   reducerPath: "search",
@@ -27,14 +13,14 @@ export const searchSlice = createApi({
     },
   }),
   endpoints: (builder) => ({
-    searchFilm: builder.query<TransformedSearchFilmsResultInterface, string>({
+    searchFilm: builder.query<SearchFilmInterface[], string>({
       query: (keyword: string) => ({
         url: `/api/v2.1/films/search-by-keyword?keyword=${keyword}`,
       }),
       transformResponse: (
         response: SearchResultInterface
-      ): TransformedSearchFilmsResultInterface => {
-        return convertSearchFilmResponse(response);
+      ): SearchFilmInterface[] => {
+        return response.films;
       },
     }),
   }),

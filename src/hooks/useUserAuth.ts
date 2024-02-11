@@ -1,12 +1,14 @@
 import { useEffect } from "react";
-import { addUser, store } from "../store";
+import { addUser } from "../store";
 import { getUser } from "../utils";
+import { useAppDispatch } from ".";
 
 export const useUserAuth = () => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const user = getUser();
     if (user) {
-      store.dispatch(addUser(user));
+      dispatch(addUser(user));
     }
   }, []);
 };
