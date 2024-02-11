@@ -1,4 +1,3 @@
-
 export interface FilmSearchResultsInterface {
-    searchTerm: string;
-  }
+  searchTerm: string;
+}

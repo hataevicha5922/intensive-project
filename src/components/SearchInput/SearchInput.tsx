@@ -1,16 +1,23 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { useAppDispatch } from "../../hooks";
+import { useAppDispatch, useDebounce } from "../../hooks";
 import { setSearchWord } from "../../store/searchWordSlice/searchWordSlice";
+import { useSearchFilmQuery } from "../../store";
 
 import s from "./SearchInput.module.css";
-import { useNavigate } from "react-router-dom";
+import { Suggest } from "../Suggest";
 
 export const SearchInput = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isShowSuggest, setIsShowSuggest] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const searchText = useDebounce(searchTerm, 1000);
+
+  const { data } = useSearchFilmQuery(searchText)!;
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -28,6 +35,10 @@ export const SearchInput = () => {
     navigate("/search");
   };
 
+  const onFocusHandler = () => setIsShowSuggest(true);
+
+  const onBlurHandler = () => setTimeout(() => setIsShowSuggest(false), 200);
+
   return (
     <div className={s["input-wrapper"]}>
       <input
@@ -37,6 +48,8 @@ export const SearchInput = () => {
         className={s["input"]}
         placeholder="Search"
         onKeyDown={(e) => onKeyDownHandler(e)}
+        onFocus={onFocusHandler}
+        onBlur={onBlurHandler}
       />
       <img
         className={s["search-icon"]}
@@ -46,6 +59,9 @@ export const SearchInput = () => {
       <button className={s["search-button"]} onClick={onClickHandler}>
         Search
       </button>
+      {searchText?.trim() && data && isShowSuggest && (
+        <Suggest films={data} searchText={searchText} />
+      )}
     </div>
   );
 };
