@@ -1,5 +1,5 @@
 import { FilmCart } from "../../components/FilmCart";
-import Headling from "../../components/Headling/Headling";
+import { Headling } from "../../components/Headling";
 import { useAppSelector } from "../../hooks";
 import { getFavoriteFilmsSelector } from "../../store";
 

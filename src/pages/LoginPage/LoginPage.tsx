@@ -2,18 +2,18 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useForm } from "react-hook-form";
+import { UserCredentialsType } from "../../types/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { Button } from "../../components/Button/Button";
+import { Headling } from "../../components/Headling";
+import { Input } from "../../components/Input/Input";
+import { Logo } from "../../components/Logo";
 import { auth } from "../../config";
 import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
 import { logInUser } from "../../utils";
-import { UserCredentialsType } from "../../types/types";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../../config/yup-schema";
-
-import { Button } from "../../components/Button/Button";
-import Headling from "../../components/Headling/Headling";
-import { Input } from "../../components/Input/Input";
-import { Logo } from "../../components/Logo";
 
 import s from "./LoginPage.module.css";
 

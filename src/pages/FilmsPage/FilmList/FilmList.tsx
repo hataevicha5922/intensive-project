@@ -3,7 +3,7 @@ import { getUserSelector } from "../../../store";
 
 import { FilmCart } from "../../../components/FilmCart/FilmCart";
 import { FilmListPropsType } from "./FilmList.props";
-import Headling from "../../../components/Headling/Headling";
+import { Headling } from "../../../components/Headling";
 
 import s from "./FilmList.module.css";
 

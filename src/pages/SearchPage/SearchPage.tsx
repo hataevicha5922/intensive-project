@@ -1,22 +1,25 @@
-import { useState } from "react";
-
-import { useDebounce } from "../../hooks/useDebounce";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import { FilmSearchResults } from "../../components/FilmSearchResults";
-import Headling from "../../components/Headling/Headling";
+import { Headling } from "../../components/Headling";
 
 import s from "./SearchPage.module.css";
 
 export const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 5000);
+  const [searchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(searchParams.get("searchText"));
+
+  useEffect(() => {
+    setSearchTerm(searchParams.get("searchText"));
+  }, [searchParams]);
 
   return (
     <div className={s["search"]}>
       <div className={s["search-header"]}>
         <Headling>Search</Headling>
       </div>
-      <FilmSearchResults searchTerm={debouncedSearchTerm} />
+      <FilmSearchResults searchTerm={searchTerm || ""} />
     </div>
   );
 };

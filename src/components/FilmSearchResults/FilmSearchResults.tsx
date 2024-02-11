@@ -6,14 +6,11 @@ import { FilmCart } from "../FilmCart";
 import { FilmSearchResultsInterface } from "./FilmSearchResult.props";
 
 import s from "./FilmSearchResults.module.css";
-import { useAppSelector } from "../../hooks";
-import { getSearchWordSelector } from "../../store/searchWordSlice/selectors";
 
 export const FilmSearchResults = ({
   searchTerm,
 }: FilmSearchResultsInterface) => {
-  const searchWord = useAppSelector(getSearchWordSelector)!;
-  const { data } = useSearchFilmQuery(searchWord);
+  const { data } = useSearchFilmQuery(searchTerm);
 
   if (data) {
     return (

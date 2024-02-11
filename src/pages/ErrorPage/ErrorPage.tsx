@@ -1,4 +1,4 @@
-import Headling from "../../components/Headling/Headling";
+import { Headling } from "../../components/Headling";
 import { Logo } from "../../components/Logo";
 
 import s from "./ErrorPage.module.css";

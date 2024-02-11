@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 
 import { auth } from "../../config";
 
-import Headling from "../../components/Headling/Headling";
+import { Headling } from "../../components/Headling";
 import { FilmCart } from "../../components/FilmCart";
 import { LocalInterface } from "../../types/types";
+import { getHistoryFilms } from "../../utils";
 
 import s from "./History.module.css";
-import { getHistoryFilms } from "../../utils";
 
 export default function HistoryPage() {
   const [historyFilms, setHistoryfilms] = useState<LocalInterface[]>([]);

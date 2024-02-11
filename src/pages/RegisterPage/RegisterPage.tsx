@@ -10,8 +10,8 @@ import { addUser } from "../../store/userSlice/userSlice";
 import { logInUser } from "../../utils";
 
 import { UserCredentialsType } from "../../types/types";
-import { Button } from "../../components/Button/Button";
-import Headling from "../../components/Headling/Headling";
+import { Button } from "../../components/Button";
+import { Headling } from "../../components/Headling";
 import { Input } from "../../components/Input/Input";
 import { Logo } from "../../components/Logo";
 
