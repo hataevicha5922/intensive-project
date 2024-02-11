@@ -12,7 +12,6 @@ import { useAppDispatch } from "../../hooks/hook";
 import { addUser } from "../../store";
 import { logInUser, logInUserInDB } from "../../utils";
 import { schema } from "../../config/yup-schema";
-import { UserCredential } from "firebase/auth";
 
 import s from "./LoginPage.module.css";
 
@@ -30,7 +29,7 @@ export const LoginPage = () => {
   const onSubmit = handleSubmit((data) => {
     logInUserInDB({
       data,
-      successHandler: (userCredential: UserCredential) => {
+      successHandler: (userCredential) => {
         const user = userCredential.user!;
         const userData = { email: user.email!, uid: user.uid! };
 

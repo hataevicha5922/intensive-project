@@ -29,7 +29,6 @@ export const SearchInput = () => {
       await addToHistory(searchTerm, user.email);
     }
     navigate(`/search?searchText=${searchTerm}`);
-    setSearchTerm("");
   };
 
   const onFocusHandler = () => setIsShowSuggest(true);
