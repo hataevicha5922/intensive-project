@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { useAppSelector, useDebounce } from "../../hooks";
 import { getUserSelector, useSearchFilmQuery } from "../../store";
@@ -10,8 +10,15 @@ import s from "./SearchInput.module.css";
 
 export const SearchInput = () => {
   const user = useAppSelector(getUserSelector)!;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get("searchText") || ""
+  );
 
-  const [searchTerm, setSearchTerm] = useState("");
+  useEffect(() => {
+    setSearchTerm(searchParams.get("searchText") || "");
+  }, [searchParams]);
+
   const [isShowSuggest, setIsShowSuggest] = useState(false);
 
   const navigate = useNavigate();
@@ -20,7 +27,7 @@ export const SearchInput = () => {
   const { data } = useSearchFilmQuery(searchText)!;
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+    setSearchParams({ searchText: e.target.value });
   };
 
   const onSubmitHandler = async (e: React.SyntheticEvent) => {
@@ -29,6 +36,7 @@ export const SearchInput = () => {
       await addToHistory(searchTerm, user.email);
     }
     navigate(`/search?searchText=${searchTerm}`);
+    setSearchTerm("");
   };
 
   const onFocusHandler = () => setIsShowSuggest(true);
