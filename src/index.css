@@ -1,6 +1,8 @@
 :root {
   --font: "Open Sans", sans-serif;
   --primary-color: #fe724c;
+  --primary-color-remove: #c7180b;
+  --primary-hover-color-remove: #800e05;
   --primary-hover-color: #df6442;
   --text-color: #000000;
   --text-secondary: #5b5b5e;
@@ -8,11 +10,10 @@
   --separator-color: #d4d6e0;
   --email-color: #9ea1b1;
   --dark-background-header: #343436;
-  --dark-background-cart:#6a6a6e;
+  --dark-background-cart: #6a6a6e;
   --dark-background-main: #343436;
 }
 body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
 }
-

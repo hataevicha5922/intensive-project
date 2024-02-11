@@ -1,11 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { FilmInterface, FilmInterfaceFromApi } from "../../types/types";
-import {
-  FilmResponseInterface,
-  DataInterface,
-  SearchResultInterface,
-  TransformedSearchFilmsResultInterface,
-} from "../types";
+import { FilmResponseInterface, DataInterface } from "../types";
 
 const convertFilmForUi = ({
   kinopoiskId,
@@ -21,14 +16,6 @@ const convertFilmForUi = ({
   ratingKinopoisk,
   year,
   nameRu: nameRu ?? description,
-});
-
-const convertSearchFilmResponse = ({
-  films,
-  keyword,
-}: SearchResultInterface) => ({
-  keyword,
-  films: films,
 });
 
 export const filmSlice = createApi({
@@ -58,18 +45,7 @@ export const filmSlice = createApi({
         return convertFilmForUi(response);
       },
     }),
-    searchFilm: builder.query<TransformedSearchFilmsResultInterface, string>({
-      query: (keyword: string) => ({
-        url: `/api/v2.1/films/search-by-keyword?keyword=${keyword}`,
-      }),
-      transformResponse: (
-        response: SearchResultInterface
-      ): TransformedSearchFilmsResultInterface => {
-        return convertSearchFilmResponse(response);
-      },
-    }),
   }),
 });
 
-export const { useGetFilmsQuery, useGetFilmInfoQuery, useSearchFilmQuery } =
-  filmSlice;
+export const { useGetFilmsQuery, useGetFilmInfoQuery } = filmSlice;

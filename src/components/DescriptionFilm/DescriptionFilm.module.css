@@ -17,6 +17,8 @@
 
 .favorites-button {
   max-height: 50px;
+  min-width: 200px;
+  margin-left: 10px;
   border: none;
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -27,4 +29,15 @@
 }
 .favorites-button:hover {
   background-color: var(--primary-hover-color);
+}
+.favorites-button-remove {
+  max-height: 50px;
+  border: none;
+  margin-left: 10px;
+  background-color: var(--primary-color-remove);
+  color: var(--white-color);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
 }

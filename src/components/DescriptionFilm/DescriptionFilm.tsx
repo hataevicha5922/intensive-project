@@ -6,10 +6,11 @@ import { FilmInterface } from "../../types/types";
 import { addToFavorites, removeToFavorites } from "../../utils";
 
 import s from "./DescriptionFilm.module.css";
+import { useNavigate } from "react-router-dom";
 
 export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
   const { nameRu, description, ratingKinopoisk, year, id } = film;
-
+  const navigate = useNavigate();
   const favoritesFilms = useAppSelector(getFavoriteFilmsSelector);
   const user = useAppSelector(getUserSelector)!;
 
@@ -46,7 +47,7 @@ export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
         </div>
         {isFavorite ? (
           <button
-            className={s["favorites-button"]}
+            className={s["favorites-button-remove"]}
             onClick={removeFromFavoritesHandler}
           >
             remove from Favorites
@@ -54,7 +55,9 @@ export const DescriptionFilm = ({ film }: { film: FilmInterface }) => {
         ) : (
           <button
             className={s["favorites-button"]}
-            onClick={addToFavoritesHandler}
+            onClick={
+              user ? addToFavoritesHandler : () => navigate("/auth/login")
+            }
           >
             add to Favorites
           </button>

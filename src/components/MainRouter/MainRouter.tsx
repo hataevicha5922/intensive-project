@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         path: "/search",
         element: <SearchPage />,
       },
+      {
+        path: "/film/:id",
+        element: <FilmPage />,
+      },
     ],
   },
   {
@@ -56,10 +60,6 @@ const router = createBrowserRouter([
             <FavoritesPage />
           </Suspense>
         ),
-      },
-      {
-        path: "/film/:id",
-        element: <FilmPage />,
       },
     ],
   },

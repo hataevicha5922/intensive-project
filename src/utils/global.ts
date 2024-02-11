@@ -32,6 +32,7 @@ export const logOutUser = async () => {
 };
 
 export const getFavoritesFilms = async (userEmail: string) => {
+
   const favRef = collection(db, `${userEmail}favorites`);
   const data = await getDocs(favRef);
   const favoriteFilms: FilmInterface[] = data.docs.map((doc) => ({

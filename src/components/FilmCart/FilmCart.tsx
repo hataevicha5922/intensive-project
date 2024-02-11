@@ -1,9 +1,11 @@
 import { useMemo } from "react";
-import { getAuth } from "firebase/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useHistory } from "../../hooks/useHistory";
 import { useTheme } from "../../context/ThemeContext";
+import { auth } from "../../config";
+import { addToFavorites, removeToFavorites } from "../../utils";
+import { useAppSelector } from "../../hooks";
+import { getFavoriteFilmsSelector } from "../../store";
 
 import { FilmCardProps } from "./FilmCart.props";
 
@@ -17,25 +19,11 @@ export const FilmCart = ({
   title,
   year,
 }: FilmCardProps) => {
-  const auth = getAuth();
   const { isDark } = useTheme();
   const user = auth.currentUser;
-  const userId = auth.currentUser?.uid;
-  const userEmail = auth.currentUser?.email;
-
-  const { addToHistory } = useHistory(`${userEmail}`);
-
-  const addToHistoryHandler = () => {
-    if (userId) {
-      addToHistory({
-        nameRu: name,
-        posterUrl: image,
-        ratingKinopoisk: rating,
-        year: year,
-        id: id,
-      });
-    }
-  };
+  const userEmail = user?.email;
+  const favoritesFilms = useAppSelector(getFavoriteFilmsSelector);
+  const navigate = useNavigate();
 
   const cardHeadStyles = useMemo(
     () => ({
@@ -46,6 +34,32 @@ export const FilmCart = ({
     }),
     [image]
   );
+
+  const isFavorite = useMemo<boolean>(
+    () => Boolean(favoritesFilms.find((film) => film.id === id)),
+    [favoritesFilms, id]
+  );
+  const addToFavoritesHandler = () => {
+    if (userEmail) {
+      addToFavorites(
+        {
+          nameRu: name,
+          posterUrl: image,
+          ratingKinopoisk: rating,
+          year: year,
+          id: id,
+          description: name,
+        },
+        userEmail
+      );
+    }
+  };
+
+  const removeFromFavoritesHandler = () => {
+    if (userEmail) {
+      removeToFavorites(id, userEmail);
+    }
+  };
 
   return (
     <div className={`${s["card"]} ${isDark ? s["dark"] : s["light"]}`}>
@@ -61,19 +75,30 @@ export const FilmCart = ({
       </div>
       <div className={s["card-footer"]}>
         <div className={s["title"]}>{title}</div>
-        <div>
-          {user ? (
-            <Link
-              to={`/film/${id}`}
-              className={s["add-to-favorites"]}
-              onClick={addToHistoryHandler}
+      </div>
+      <div>
+        <div className={s["button-wrapper"]}>
+          <Link to={`/film/${id}`} className={s["add-to-favorites"]}>
+            More
+          </Link>
+          {isFavorite ? (
+            <button
+              className={s["favorites-button-remove"]}
+              onClick={removeFromFavoritesHandler}
             >
-              More
-            </Link>
+              remove from Favorites
+            </button>
           ) : (
-            <Link to={`/auth/login`} className={s["add-to-favorites"]}>
-              More
-            </Link>
+            <button
+              className={s["favorites-button"]}
+              onClick={
+                userEmail
+                  ? addToFavoritesHandler
+                  : () => navigate("/auth/login")
+              }
+            >
+              add to Favorites
+            </button>
           )}
         </div>
       </div>
